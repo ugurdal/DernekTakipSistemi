@@ -1,0 +1,12 @@
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\dernek.csprojResolveAssemblyReference.cache
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\dernek.Properties.Resources.resources
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\dernek.csproj.GenerateResource.Cache
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\dernek.AnaForm.resources
+C:\DerinSIS_Proje\_dernek\dernek\bin\Debug\DernekTakipSistemi.exe.config
+C:\DerinSIS_Proje\_dernek\dernek\bin\Debug\DernekTakipSistemi.exe
+C:\DerinSIS_Proje\_dernek\dernek\bin\Debug\DernekTakipSistemi.pdb
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\DernekTakipSistemi.exe
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\DernekTakipSistemi.pdb
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\dernek.csproj.ResolveComReference.cache
+C:\DerinSIS_Proje\_dernek\dernek\obj\Debug\dernek.formGiris.resources

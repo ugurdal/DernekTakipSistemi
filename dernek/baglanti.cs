@@ -192,6 +192,14 @@ public class baglanti
         }
     }
 
+    public string ParaFormat(string tutar)
+    {
+        System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("tr-TR");
+        int valueBefore = Int32.Parse(tutar, System.Globalization.NumberStyles.AllowThousands);
+        string sonuc = String.Format(culture, "{0:N2}", valueBefore);
+        return sonuc;
+    }
+
     public bool EpostaKontrol(string eposta)
     {
         string patternStrict = @"^(([^<>()[\]\\.,;:\s@\""]+"

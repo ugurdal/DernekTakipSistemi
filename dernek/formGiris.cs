@@ -13,6 +13,7 @@ namespace dernek
     public partial class formGiris : Form
     {
         baglanti _baglanti = new baglanti();
+        
         public formGiris()
         {
             InitializeComponent();
@@ -50,18 +51,18 @@ namespace dernek
                 MessageBox.Show("Kullanıcı adı ve şifre eksiksiz girilmeli", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            var sql = new SqlCommand(string.Format("Select count(*) From dbo.kullanici Where kullaniciAdi='{0}' And Parola='{1}'", textBoxKullanici.Text, textBoxSifre.Text), _baglanti.cnn);
-            sql.CommandType = CommandType.Text;
-            sql.CommandTimeout = 3000;
-            var sonuc = sql.ExecuteScalar().ToString();
-            if (sonuc == "0")
+            var dt = new DataTable();
+            new SqlDataAdapter(string.Format("Select * From dbo.kullanici Where kullaniciAdi='{0}' And Parola='{1}'", textBoxKullanici.Text, textBoxSifre.Text), _baglanti.cnn).Fill(dt);
+            
+            if (dt.Rows.Count == 0)
             {
                 MessageBox.Show("Kullanıcı adı veya parola hatalı !", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
-
-            var frm = new AnaForm();
+            string _kullanici = dt.Rows[0]["adSoyad"].ToString();
+            
+            var frm = new formMenu();
+            frm.basla(_baglanti.datasource, _baglanti.database, _kullanici);
             frm.ShowDialog();
             this.Close();
         }

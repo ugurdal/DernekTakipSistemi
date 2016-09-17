@@ -55,11 +55,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnaForm.cs">
+    <Compile Include="formCari.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AnaForm.Designer.cs">
-      <DependentUpon>AnaForm.cs</DependentUpon>
+    <Compile Include="formCari.Designer.cs">
+      <DependentUpon>formCari.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formMusteri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMusteri.Designer.cs">
+      <DependentUpon>formMusteri.cs</DependentUpon>
     </Compile>
     <Compile Include="baglanti.cs" />
     <Compile Include="formGiris.cs">
@@ -68,10 +74,22 @@
     <Compile Include="formGiris.Designer.cs">
       <DependentUpon>formGiris.cs</DependentUpon>
     </Compile>
+    <Compile Include="formMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMenu.Designer.cs">
+      <DependentUpon>formMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AnaForm.resx">
-      <DependentUpon>AnaForm.cs</DependentUpon>
+    <EmbeddedResource Include="formCari.resx">
+      <DependentUpon>formCari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMenu.resx">
+      <DependentUpon>formMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMusteri.resx">
+      <DependentUpon>formMusteri.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formGiris.resx">
       <DependentUpon>formGiris.cs</DependentUpon>
@@ -107,6 +125,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="file.ico" />
+    <None Include="Resources\NewDocumentHS.png" />
+    <None Include="Resources\wave2.jpeg" />
+    <None Include="Resources\wave6.jpg" />
+    <None Include="Resources\wave3.jpg" />
+    <None Include="Resources\wave4.jpg" />
+    <None Include="Resources\wave5.jpg" />
+    <None Include="Resources\wave1.jpg" />
+    <None Include="Resources\back.jpg" />
+    <None Include="Resources\contact-form-background1.jpg" />
+    <None Include="Resources\lines-wavy-light-form-1600x1200.jpg" />
+    <None Include="Resources\cari.png" />
+    <None Include="Resources\rapor.png" />
+    <None Include="Resources\cari.jpg" />
+    <None Include="Resources\customer.png" />
+    <None Include="Resources\musteri.jpg" />
+    <None Include="Resources\user1.png" />
+    <None Include="Resources\contact-form-background.jpg" />
+    <None Include="Resources\database.png" />
+    <None Include="Resources\server.png" />
+    <None Include="Resources\user.png" />
     <None Include="Resources\AddTableHS.png" />
     <None Include="Resources\AlignTableCellMiddleLeftJustHS.png" />
     <None Include="Resources\excel-icon.png" />

@@ -33,14 +33,14 @@
             this.textBoxKullanici = new System.Windows.Forms.TextBox();
             this.textBoxSifre = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(33, 175);
+            this.button1.Location = new System.Drawing.Point(25, 171);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 40);
             this.button1.TabIndex = 0;
@@ -50,14 +50,14 @@
             // 
             // textBoxKullanici
             // 
-            this.textBoxKullanici.Location = new System.Drawing.Point(33, 53);
+            this.textBoxKullanici.Location = new System.Drawing.Point(25, 49);
             this.textBoxKullanici.Name = "textBoxKullanici";
             this.textBoxKullanici.Size = new System.Drawing.Size(170, 22);
             this.textBoxKullanici.TabIndex = 1;
             // 
             // textBoxSifre
             // 
-            this.textBoxSifre.Location = new System.Drawing.Point(33, 121);
+            this.textBoxSifre.Location = new System.Drawing.Point(25, 117);
             this.textBoxSifre.Name = "textBoxSifre";
             this.textBoxSifre.PasswordChar = '*';
             this.textBoxSifre.Size = new System.Drawing.Size(170, 22);
@@ -76,23 +76,23 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 14);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Kullanıcı Adı";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 99);
+            this.label2.Location = new System.Drawing.Point(25, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 14);
             this.label2.TabIndex = 4;
             this.label2.Text = "Parola";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 14);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Kullanıcı Adı";
             // 
             // formGiris
             // 

@@ -58,5 +58,17 @@ namespace dernek.Properties {
                 return ((string)(this["dataSource"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string not {
+            get {
+                return ((string)(this["not"]));
+            }
+            set {
+                this["not"] = value;
+            }
+        }
     }
 }

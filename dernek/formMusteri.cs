@@ -13,12 +13,12 @@ using System.Text.RegularExpressions;
 
 namespace dernek
 {
-    public partial class AnaForm : Form
+    public partial class formMusteri : Form
     {
         baglanti _baglanti = new baglanti();
         List<int> ytkSil = new List<int>();
 
-        public AnaForm()
+        public formMusteri()
         {
             InitializeComponent();
         }
@@ -419,45 +419,45 @@ namespace dernek
             MusteriAra(false, true);
         }
 
-        private void openToolStripButton1_Click(object sender, EventArgs e)
-        {
-            copyAlltoClipboard();
-            Microsoft.Office.Interop.Excel.Application xlexcel;
-            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
-            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
-            object misValue = System.Reflection.Missing.Value;
-            xlexcel = new Microsoft.Office.Interop.Excel.Application();
-            xlexcel.Visible = true;
-            xlWorkBook = xlexcel.Workbooks.Add(misValue);
-            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[1, 1];
-            CR.Select();
-            xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+        //private void openToolStripButton1_Click(object sender, EventArgs e)
+        //{
+        //    copyAlltoClipboard();
+        //    Microsoft.Office.Interop.Excel.Application xlexcel;
+        //    Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+        //    Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+        //    object misValue = System.Reflection.Missing.Value;
+        //    xlexcel = new Microsoft.Office.Interop.Excel.Application();
+        //    xlexcel.Visible = true;
+        //    xlWorkBook = xlexcel.Workbooks.Add(misValue);
+        //    xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+        //    Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[1, 1];
+        //    CR.Select();
+        //    xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
 
-        }
+        //}
 
-        private void copyAlltoClipboard()
-        {
-            dgwRapor.SelectAll();
-            DataObject dataObj = dgwRapor.GetClipboardContent();
-            if (dataObj != null)
-                Clipboard.SetDataObject(dataObj);
-        }
+        //private void copyAlltoClipboard()
+        //{
+        //    dgwRapor.SelectAll();
+        //    DataObject dataObj = dgwRapor.GetClipboardContent();
+        //    if (dataObj != null)
+        //        Clipboard.SetDataObject(dataObj);
+        //}
 
-        private void printToolStripButton1_Click(object sender, EventArgs e)
-        {
-            _baglanti.ac();
-            DataTable dt = new DataTable();
-            new SqlDataAdapter("Select * from dbo.musteri Order By mstAd", _baglanti.cnn).Fill(dt);
+        //private void printToolStripButton1_Click(object sender, EventArgs e)
+        //{
+        //    _baglanti.ac();
+        //    DataTable dt = new DataTable();
+        //    new SqlDataAdapter("Select * from dbo.musteri Order By mstAd", _baglanti.cnn).Fill(dt);
 
-            dgwRapor.DataSource = null;
-            dgwRapor.Rows.Clear();
+        //    dgwRapor.DataSource = null;
+        //    dgwRapor.Rows.Clear();
 
-            if (dt.Rows.Count > 0)
-                dgwRapor.DataSource = dt;
+        //    if (dt.Rows.Count > 0)
+        //        dgwRapor.DataSource = dt;
 
-            _baglanti.kapat();
-        }
+        //    _baglanti.kapat();
+        //}
 
         private void dgwYetkili_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
@@ -466,7 +466,7 @@ namespace dernek
 
         private void textBoxEPosta_Leave(object sender, EventArgs e)
         {
-            if (!_baglanti.EpostaKontrol(textBoxEPosta.Text))
+            if (!_baglanti.EpostaKontrol(textBoxEPosta.Text) && textBoxEPosta.Text != "")
             {
                 MessageBox.Show("E-posta adresini kontrol ediniz !", "Uyarı", MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
@@ -504,7 +504,7 @@ namespace dernek
 
         private void textBoxTCNo_Leave(object sender, EventArgs e)
         {
-            if (textBoxTCNo.Text.Length != 11)
+            if (textBoxTCNo.Text != "" && textBoxTCNo.Text.Length != 11)
             {
                 MessageBox.Show("TCKN 11 hane olmalı ! ", "Uyarı", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -524,6 +524,31 @@ namespace dernek
             }
         }
 
+        private void cutToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.OK ==
+                MessageBox.Show("İlgili müşteri silinecek, emin misiniz ?", "Uyarı", MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question))
+            {
+                try
+                {
+                    _baglanti.ac();
+                    var sil = new SqlCommand("dbo.musteri_sil", _baglanti.cnn);
+                    sil.CommandType = CommandType.StoredProcedure;
+                    sil.Parameters.AddWithValue("@musteriID", labelID.Text);
+                    sil.CommandTimeout = 3000;
+                    sil.ExecuteNonQuery();
+                    Temizle();
+                    MusteriAra(true,true);
+                    _baglanti.kapat();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            
+        }
 
     }
 }

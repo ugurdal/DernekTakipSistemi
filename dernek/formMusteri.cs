@@ -105,8 +105,6 @@ namespace dernek
         {
             _baglanti.ac();
             DataTable dtIl = new DataTable();
-
-
             new SqlDataAdapter(("Select * from dbo.ilTanimlari Order By ilAdi"), _baglanti.cnn).Fill(dtIl);
             comboBoxIl.DisplayMember = "ilAdi";
             comboBoxIl.ValueMember = "ilPlaka";
@@ -198,6 +196,20 @@ namespace dernek
                 }
 
             }
+
+
+            DataTable dtCari = new DataTable();
+            new SqlDataAdapter(string.Format(("Select * from dbo.cariBakiye_vw Where cariMusteri={0}"), mstID), _baglanti.cnn).Fill(dtCari);
+
+            if (dtCari.Rows.Count > 0)
+            {
+                textBoxBakiye.Text = _baglanti.ParaFormat(dtCari.Rows[0]["bakiye"].ToString());
+            }
+            else
+            {
+                textBoxBakiye.Text = "0";
+            }
+
             _baglanti.kapat();
         }
 
@@ -539,7 +551,7 @@ namespace dernek
                     sil.CommandTimeout = 3000;
                     sil.ExecuteNonQuery();
                     Temizle();
-                    MusteriAra(true,true);
+                    MusteriAra(true, true);
                     _baglanti.kapat();
                 }
                 catch (Exception ex)
@@ -547,7 +559,7 @@ namespace dernek
                     MessageBox.Show(ex.Message);
                 }
             }
-            
+
         }
 
     }

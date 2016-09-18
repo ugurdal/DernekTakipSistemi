@@ -42,6 +42,12 @@ namespace dernek
             {
                 Giris();
             }
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                _baglanti.programKapat();
+            }
+
         }
 
         private void Giris()

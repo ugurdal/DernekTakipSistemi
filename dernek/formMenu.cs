@@ -45,6 +45,7 @@ namespace dernek
             
             Properties.Settings.Default.not = notlar.Text;
             Properties.Settings.Default.Save();
+            
         }
 
         private void pbMusteri_Click(object sender, EventArgs e)

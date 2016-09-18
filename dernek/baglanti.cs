@@ -146,6 +146,17 @@ public class baglanti
         return s;
     }
 
+    public bool isNumeric(string s)
+    {
+        double price;
+        bool isDouble = Double.TryParse(s, out price);
+        if (!isDouble)
+        {
+            MessageBox.Show("Tutarı kontrol ediniz !", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+        return true;
+    }
 
     public string ToMultiLineString(string str, int adet)
     {
@@ -195,7 +206,7 @@ public class baglanti
     public string ParaFormat(string tutar)
     {
         System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("tr-TR");
-        int valueBefore = Int32.Parse(tutar, System.Globalization.NumberStyles.AllowThousands);
+        double valueBefore = double.Parse(tutar);
         string sonuc = String.Format(culture, "{0:N2}", valueBefore);
         return sonuc;
     }

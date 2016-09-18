@@ -68,11 +68,11 @@
             this.helpToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripCariUst = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox3 = new System.Windows.Forms.ToolStripTextBox();
+            this.tbBorc = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox4 = new System.Windows.Forms.ToolStripTextBox();
+            this.tbAlacak = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
+            this.tbBakiye = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -105,8 +105,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Panel2.Controls.Add(this.toolStripCariUst);
-            this.splitContainer2.Size = new System.Drawing.Size(1091, 674);
-            this.splitContainer2.SplitterDistance = 277;
+            this.splitContainer2.Size = new System.Drawing.Size(969, 674);
+            this.splitContainer2.SplitterDistance = 246;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -118,7 +118,7 @@
             this.tsTumMusteriler});
             this.toolStripCariAra.Location = new System.Drawing.Point(0, 0);
             this.toolStripCariAra.Name = "toolStripCariAra";
-            this.toolStripCariAra.Size = new System.Drawing.Size(277, 25);
+            this.toolStripCariAra.Size = new System.Drawing.Size(246, 25);
             this.toolStripCariAra.TabIndex = 2;
             this.toolStripCariAra.Text = "toolStrip3";
             // 
@@ -181,7 +181,7 @@
             this.dgwMusteriCari.Location = new System.Drawing.Point(0, 25);
             this.dgwMusteriCari.Name = "dgwMusteriCari";
             this.dgwMusteriCari.ReadOnly = true;
-            this.dgwMusteriCari.Size = new System.Drawing.Size(274, 646);
+            this.dgwMusteriCari.Size = new System.Drawing.Size(243, 646);
             this.dgwMusteriCari.TabIndex = 1;
             this.dgwMusteriCari.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwMusteriCari_CellClick);
             // 
@@ -206,7 +206,8 @@
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer3.IsSplitterFixed = true;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 27);
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -218,8 +219,8 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.gbCari);
             this.splitContainer3.Panel2.Controls.Add(this.toolStripCari);
-            this.splitContainer3.Size = new System.Drawing.Size(809, 649);
-            this.splitContainer3.SplitterDistance = 271;
+            this.splitContainer3.Size = new System.Drawing.Size(718, 647);
+            this.splitContainer3.SplitterDistance = 420;
             this.splitContainer3.TabIndex = 1;
             // 
             // groupBox5
@@ -228,18 +229,24 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(809, 271);
+            this.groupBox5.Size = new System.Drawing.Size(718, 420);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             // 
             // dgwCari
             // 
+            this.dgwCari.AllowUserToAddRows = false;
+            this.dgwCari.AllowUserToDeleteRows = false;
             this.dgwCari.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwCari.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgwCari.Location = new System.Drawing.Point(3, 18);
+            this.dgwCari.MultiSelect = false;
             this.dgwCari.Name = "dgwCari";
-            this.dgwCari.Size = new System.Drawing.Size(803, 250);
+            this.dgwCari.ReadOnly = true;
+            this.dgwCari.Size = new System.Drawing.Size(712, 399);
             this.dgwCari.TabIndex = 0;
+            this.dgwCari.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwCari_CellClick);
+            this.dgwCari.Sorted += new System.EventHandler(this.dgwCari_Sorted);
             // 
             // gbCari
             // 
@@ -260,14 +267,14 @@
             this.gbCari.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCari.Location = new System.Drawing.Point(0, 25);
             this.gbCari.Name = "gbCari";
-            this.gbCari.Size = new System.Drawing.Size(809, 349);
+            this.gbCari.Size = new System.Drawing.Size(718, 198);
             this.gbCari.TabIndex = 1;
             this.gbCari.TabStop = false;
             // 
             // labelKod
             // 
             this.labelKod.AutoSize = true;
-            this.labelKod.Location = new System.Drawing.Point(472, 23);
+            this.labelKod.Location = new System.Drawing.Point(103, 106);
             this.labelKod.Name = "labelKod";
             this.labelKod.Size = new System.Drawing.Size(14, 14);
             this.labelKod.TabIndex = 14;
@@ -276,7 +283,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(394, 22);
+            this.label6.Location = new System.Drawing.Point(16, 106);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 14);
             this.label6.TabIndex = 13;
@@ -284,14 +291,15 @@
             // 
             // islemTarihi
             // 
-            this.islemTarihi.Location = new System.Drawing.Point(106, 101);
+            this.islemTarihi.Location = new System.Drawing.Point(455, 19);
+            this.islemTarihi.MaxSelectionCount = 1;
             this.islemTarihi.Name = "islemTarihi";
-            this.islemTarihi.TabIndex = 12;
+            this.islemTarihi.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 270);
+            this.label5.Location = new System.Drawing.Point(16, 138);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 14);
             this.label5.TabIndex = 11;
@@ -299,16 +307,17 @@
             // 
             // textBoxNot
             // 
-            this.textBoxNot.Location = new System.Drawing.Point(106, 267);
+            this.textBoxNot.Location = new System.Drawing.Point(106, 135);
+            this.textBoxNot.MaxLength = 150;
             this.textBoxNot.Multiline = true;
             this.textBoxNot.Name = "textBoxNot";
-            this.textBoxNot.Size = new System.Drawing.Size(234, 67);
-            this.textBoxNot.TabIndex = 10;
+            this.textBoxNot.Size = new System.Drawing.Size(234, 46);
+            this.textBoxNot.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 109);
+            this.label4.Location = new System.Drawing.Point(365, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 14);
             this.label4.TabIndex = 9;
@@ -318,8 +327,9 @@
             // 
             this.textBoxTutar.Location = new System.Drawing.Point(106, 75);
             this.textBoxTutar.Name = "textBoxTutar";
+            this.textBoxTutar.ShortcutsEnabled = false;
             this.textBoxTutar.Size = new System.Drawing.Size(121, 22);
-            this.textBoxTutar.TabIndex = 7;
+            this.textBoxTutar.TabIndex = 3;
             this.textBoxTutar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxTutar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTutar_KeyPress);
             this.textBoxTutar.Leave += new System.EventHandler(this.textBoxTutar_Leave);
@@ -348,12 +358,12 @@
             this.comboboxBA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboboxBA.FormattingEnabled = true;
             this.comboboxBA.Items.AddRange(new object[] {
-            "Borç",
-            "Alacak"});
-            this.comboboxBA.Location = new System.Drawing.Point(269, 47);
+            "Alacak",
+            "Borç"});
+            this.comboboxBA.Location = new System.Drawing.Point(237, 47);
             this.comboboxBA.Name = "comboboxBA";
             this.comboboxBA.Size = new System.Drawing.Size(71, 22);
-            this.comboboxBA.TabIndex = 4;
+            this.comboboxBA.TabIndex = 2;
             // 
             // comboBoxIslemTip
             // 
@@ -361,8 +371,9 @@
             this.comboBoxIslemTip.FormattingEnabled = true;
             this.comboBoxIslemTip.Location = new System.Drawing.Point(106, 47);
             this.comboBoxIslemTip.Name = "comboBoxIslemTip";
-            this.comboBoxIslemTip.Size = new System.Drawing.Size(157, 22);
-            this.comboBoxIslemTip.TabIndex = 3;
+            this.comboBoxIslemTip.Size = new System.Drawing.Size(121, 22);
+            this.comboBoxIslemTip.TabIndex = 1;
+            this.comboBoxIslemTip.SelectedIndexChanged += new System.EventHandler(this.comboBoxIslemTip_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -378,7 +389,7 @@
             this.textBoxEvrakNo.Location = new System.Drawing.Point(106, 19);
             this.textBoxEvrakNo.Name = "textBoxEvrakNo";
             this.textBoxEvrakNo.Size = new System.Drawing.Size(121, 22);
-            this.textBoxEvrakNo.TabIndex = 1;
+            this.textBoxEvrakNo.TabIndex = 0;
             // 
             // label1
             // 
@@ -401,8 +412,8 @@
             this.helpToolStripButton1});
             this.toolStripCari.Location = new System.Drawing.Point(0, 0);
             this.toolStripCari.Name = "toolStripCari";
-            this.toolStripCari.Size = new System.Drawing.Size(809, 25);
-            this.toolStripCari.TabIndex = 0;
+            this.toolStripCari.Size = new System.Drawing.Size(718, 25);
+            this.toolStripCari.TabIndex = 1;
             this.toolStripCari.Text = "toolStrip5";
             // 
             // newToolStripButton1
@@ -463,69 +474,83 @@
             // 
             this.toolStripCariUst.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.toolStripTextBox3,
+            this.tbBorc,
             this.toolStripLabel2,
-            this.toolStripTextBox4,
+            this.tbAlacak,
             this.toolStripLabel3,
-            this.toolStripTextBox2});
+            this.tbBakiye});
             this.toolStripCariUst.Location = new System.Drawing.Point(0, 0);
             this.toolStripCariUst.Name = "toolStripCariUst";
-            this.toolStripCariUst.Size = new System.Drawing.Size(809, 25);
+            this.toolStripCariUst.Size = new System.Drawing.Size(718, 27);
             this.toolStripCariUst.TabIndex = 0;
             this.toolStripCariUst.Text = "toolStrip4";
             // 
             // toolStripLabel1
             // 
-            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.toolStripLabel1.Size = new System.Drawing.Size(51, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(53, 24);
             this.toolStripLabel1.Text = "Borç";
             // 
-            // toolStripTextBox3
+            // tbBorc
             // 
-            this.toolStripTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBox3.Enabled = false;
-            this.toolStripTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
-            this.toolStripTextBox3.Name = "toolStripTextBox3";
-            this.toolStripTextBox3.Size = new System.Drawing.Size(116, 23);
+            this.tbBorc.BackColor = System.Drawing.SystemColors.Control;
+            this.tbBorc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbBorc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.tbBorc.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
+            this.tbBorc.Name = "tbBorc";
+            this.tbBorc.ReadOnly = true;
+            this.tbBorc.Size = new System.Drawing.Size(116, 25);
+            this.tbBorc.Text = "0";
+            this.tbBorc.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // toolStripLabel2
             // 
+            this.toolStripLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.toolStripLabel2.Size = new System.Drawing.Size(62, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(63, 24);
             this.toolStripLabel2.Text = "Alacak";
             // 
-            // toolStripTextBox4
+            // tbAlacak
             // 
-            this.toolStripTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBox4.Enabled = false;
-            this.toolStripTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
-            this.toolStripTextBox4.Name = "toolStripTextBox4";
-            this.toolStripTextBox4.Size = new System.Drawing.Size(116, 23);
+            this.tbAlacak.BackColor = System.Drawing.SystemColors.Control;
+            this.tbAlacak.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbAlacak.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.tbAlacak.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
+            this.tbAlacak.Name = "tbAlacak";
+            this.tbAlacak.ReadOnly = true;
+            this.tbAlacak.Size = new System.Drawing.Size(116, 25);
+            this.tbAlacak.Text = "0";
+            this.tbAlacak.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // toolStripLabel3
             // 
+            this.toolStripLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.toolStripLabel3.Name = "toolStripLabel3";
             this.toolStripLabel3.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.toolStripLabel3.Size = new System.Drawing.Size(61, 22);
+            this.toolStripLabel3.Size = new System.Drawing.Size(64, 24);
             this.toolStripLabel3.Text = "Bakiye";
             // 
-            // toolStripTextBox2
+            // tbBakiye
             // 
-            this.toolStripTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBox2.Enabled = false;
-            this.toolStripTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
-            this.toolStripTextBox2.Name = "toolStripTextBox2";
-            this.toolStripTextBox2.Size = new System.Drawing.Size(116, 23);
+            this.tbBakiye.BackColor = System.Drawing.SystemColors.Control;
+            this.tbBakiye.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbBakiye.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.tbBakiye.Margin = new System.Windows.Forms.Padding(1, 2, 1, 0);
+            this.tbBakiye.Name = "tbBakiye";
+            this.tbBakiye.ReadOnly = true;
+            this.tbBakiye.Size = new System.Drawing.Size(116, 25);
+            this.tbBakiye.Text = "0";
+            this.tbBakiye.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // formCari
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 674);
+            this.ClientSize = new System.Drawing.Size(969, 674);
             this.Controls.Add(this.splitContainer2);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -533,6 +558,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cari İşlemler";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formCari_FormClosing);
             this.Load += new System.EventHandler(this.formCari_Load);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
@@ -583,11 +609,11 @@
         private System.Windows.Forms.ToolStripButton helpToolStripButton1;
         private System.Windows.Forms.ToolStrip toolStripCariUst;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox3;
+        private System.Windows.Forms.ToolStripTextBox tbBorc;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox4;
+        private System.Windows.Forms.ToolStripTextBox tbAlacak;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
+        private System.Windows.Forms.ToolStripTextBox tbBakiye;
         private System.Windows.Forms.DataGridViewTextBoxColumn mstAd;
         private System.Windows.Forms.DataGridViewTextBoxColumn mstID;
         private System.Windows.Forms.DataGridViewTextBoxColumn mstKod;

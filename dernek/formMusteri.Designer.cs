@@ -82,6 +82,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxAdres = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxBakiye = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxVN = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -164,7 +166,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.toolStripMusteri);
             this.splitContainer1.Size = new System.Drawing.Size(1134, 722);
-            this.splitContainer1.SplitterDistance = 288;
+            this.splitContainer1.SplitterDistance = 299;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -184,7 +186,7 @@
             this.dgwMusteri.Name = "dgwMusteri";
             this.dgwMusteri.ReadOnly = true;
             this.dgwMusteri.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwMusteri.Size = new System.Drawing.Size(288, 697);
+            this.dgwMusteri.Size = new System.Drawing.Size(299, 697);
             this.dgwMusteri.TabIndex = 0;
             this.dgwMusteri.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwMusteri_CellClick);
             // 
@@ -217,7 +219,7 @@
             this.tsTumMusteriler});
             this.toolStripMusteriAra.Location = new System.Drawing.Point(0, 0);
             this.toolStripMusteriAra.Name = "toolStripMusteriAra";
-            this.toolStripMusteriAra.Size = new System.Drawing.Size(288, 25);
+            this.toolStripMusteriAra.Size = new System.Drawing.Size(299, 25);
             this.toolStripMusteriAra.TabIndex = 1;
             this.toolStripMusteriAra.Text = "toolStrip2";
             // 
@@ -273,7 +275,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 25);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(841, 697);
+            this.groupBox1.Size = new System.Drawing.Size(830, 697);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -612,13 +614,15 @@
             this.textBoxAdres.Location = new System.Drawing.Point(90, 24);
             this.textBoxAdres.Multiline = true;
             this.textBoxAdres.Name = "textBoxAdres";
-            this.textBoxAdres.Size = new System.Drawing.Size(289, 69);
+            this.textBoxAdres.Size = new System.Drawing.Size(315, 69);
             this.textBoxAdres.TabIndex = 0;
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.textBoxBakiye);
+            this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.textBoxVN);
             this.groupBox2.Controls.Add(this.label4);
@@ -636,6 +640,26 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Temel Bilgiler";
+            // 
+            // textBoxBakiye
+            // 
+            this.textBoxBakiye.Enabled = false;
+            this.textBoxBakiye.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBoxBakiye.Location = new System.Drawing.Point(319, 21);
+            this.textBoxBakiye.Name = "textBoxBakiye";
+            this.textBoxBakiye.Size = new System.Drawing.Size(86, 22);
+            this.textBoxBakiye.TabIndex = 36;
+            this.textBoxBakiye.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label17.Location = new System.Drawing.Point(267, 25);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(46, 14);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "Bakiye";
             // 
             // label5
             // 
@@ -716,7 +740,7 @@
             // 
             this.labelID.AutoSize = true;
             this.labelID.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelID.Location = new System.Drawing.Point(358, 25);
+            this.labelID.Location = new System.Drawing.Point(210, 25);
             this.labelID.Name = "labelID";
             this.labelID.Size = new System.Drawing.Size(21, 14);
             this.labelID.TabIndex = 4;
@@ -726,7 +750,7 @@
             // 
             this.textBoxKod.Location = new System.Drawing.Point(90, 22);
             this.textBoxKod.Name = "textBoxKod";
-            this.textBoxKod.Size = new System.Drawing.Size(258, 22);
+            this.textBoxKod.Size = new System.Drawing.Size(114, 22);
             this.textBoxKod.TabIndex = 0;
             // 
             // textBoxAd
@@ -734,7 +758,7 @@
             this.textBoxAd.Location = new System.Drawing.Point(90, 50);
             this.textBoxAd.Multiline = true;
             this.textBoxAd.Name = "textBoxAd";
-            this.textBoxAd.Size = new System.Drawing.Size(289, 51);
+            this.textBoxAd.Size = new System.Drawing.Size(315, 51);
             this.textBoxAd.TabIndex = 1;
             // 
             // toolStripMusteri
@@ -749,7 +773,7 @@
             this.helpToolStripButton});
             this.toolStripMusteri.Location = new System.Drawing.Point(0, 0);
             this.toolStripMusteri.Name = "toolStripMusteri";
-            this.toolStripMusteri.Size = new System.Drawing.Size(841, 25);
+            this.toolStripMusteri.Size = new System.Drawing.Size(830, 25);
             this.toolStripMusteri.TabIndex = 0;
             this.toolStripMusteri.Text = "toolStrip1";
             // 
@@ -921,6 +945,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn yetkiliDahili;
         private System.Windows.Forms.DataGridViewTextBoxColumn yetkiliEposta;
         private System.Windows.Forms.DataGridViewTextBoxColumn yetkiliID;
+        private System.Windows.Forms.TextBox textBoxBakiye;
+        private System.Windows.Forms.Label label17;
     }
 }
 

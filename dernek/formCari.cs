@@ -117,7 +117,7 @@ namespace dernek
 
         private void textBoxTutar_KeyPress(object sender, KeyPressEventArgs e)
         {
-           if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != (char)44)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != (char)44)
             {
                 e.Handled = true;
             }
@@ -185,7 +185,7 @@ namespace dernek
                     cl.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     cl.DefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
                 }
-                
+
             }
 
         }
@@ -231,7 +231,7 @@ namespace dernek
                 return;
             }
 
-            if(! _baglanti.isNumeric(textBoxTutar.Text))
+            if (!_baglanti.isNumeric(textBoxTutar.Text))
                 return;
 
             Kaydet();
@@ -240,10 +240,10 @@ namespace dernek
         private void Kaydet()
         {
             _baglanti.ac();
-            
+
             try
             {
-                var kaydet = new SqlCommand("dbo.cariKaydet", _baglanti.cnn);
+                var kaydet = new SqlCommand("dbo.cari_ekle", _baglanti.cnn);
                 kaydet.CommandType = CommandType.StoredProcedure;
                 SqlParameter id = kaydet.Parameters.Add("@cID", SqlDbType.Int);
                 id.Direction = ParameterDirection.ReturnValue;
@@ -252,8 +252,8 @@ namespace dernek
                 kaydet.Parameters.AddWithValue("@tip", comboBoxIslemTip.SelectedValue);
                 kaydet.Parameters.AddWithValue("@musteri", labelKod.Text);
                 kaydet.Parameters.AddWithValue("@cba", comboboxBA.SelectedIndex);
-                double tutar = double.Parse(textBoxTutar.Text.Replace("-",""));
-                kaydet.Parameters.AddWithValue("@tutar", comboboxBA.SelectedIndex == 0 ? tutar : -1*tutar);
+                double tutar = double.Parse(textBoxTutar.Text.Replace("-", ""));
+                kaydet.Parameters.AddWithValue("@tutar", comboboxBA.SelectedIndex == 0 ? tutar : -1 * tutar);
                 kaydet.Parameters.AddWithValue("@tarih", islemTarihi.SelectionStart.ToShortDateString());
                 kaydet.Parameters.AddWithValue("@not", textBoxNot.Text);
                 kaydet.Parameters.AddWithValue("@kisi", 1);
@@ -270,7 +270,7 @@ namespace dernek
             {
                 MessageBox.Show("Hata : " + ex.Message);
             }
-          
+
             _baglanti.kapat();
         }
 
@@ -310,7 +310,7 @@ namespace dernek
                 else
                 {
                     comboboxBA.SelectedIndex = 0;
-                }    
+                }
             }
         }
 
@@ -318,6 +318,36 @@ namespace dernek
         {
             _baglanti.programKapat();
         }
-        
+
+        private void tsSil_Click(object sender, EventArgs e)
+        {
+            if (labelID.Text == "0" || labelKod.Text == "0")
+                return;
+
+            if (MessageBox.Show("İlgili cari hareket silinecek, emin misiniz ?", "Uyarı", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) != DialogResult.OK)
+                return;
+
+            CariSil(labelID.Text);
+            BakiyeOku(int.Parse(labelKod.Text));
+            CariHareketDoldur(int.Parse(labelKod.Text));
+        }
+
+        private void CariSil(string cariID)
+        {
+            _baglanti.ac();
+            try
+            {
+                var sil = new SqlCommand("dbo.cari_sil", _baglanti.cnn);
+                sil.CommandType = CommandType.StoredProcedure;
+                sil.Parameters.AddWithValue("@cID", cariID);
+                sil.CommandTimeout = 3000;
+                sil.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Silinemedi hata : " + ex.Message);
+            }
+        }
+
     }
 }

@@ -454,6 +454,7 @@
             this.tsSil.Name = "tsSil";
             this.tsSil.Size = new System.Drawing.Size(39, 22);
             this.tsSil.Text = "Sil";
+            this.tsSil.Click += new System.EventHandler(this.tsSil_Click);
             // 
             // toolStripSeparator3
             // 

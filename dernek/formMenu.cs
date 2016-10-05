@@ -30,9 +30,9 @@ namespace dernek
 
         public void basla(string sunucu, string veritabani, string kullanici)
         {
-            _sunucu = sunucu;
+            _sunucu = "Microsoft Access";
             _kullanici = kullanici;
-            _veritabani = veritabani;
+            _veritabani = "Dernek";
         }
 
         private void formMenu_FormClosing(object sender, FormClosingEventArgs e)

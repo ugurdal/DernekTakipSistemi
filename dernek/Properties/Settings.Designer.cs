@@ -70,5 +70,17 @@ namespace dernek.Properties {
                 this["not"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string oleDbConn {
+            get {
+                return ((string)(this["oleDbConn"]));
+            }
+            set {
+                this["oleDbConn"] = value;
+            }
+        }
     }
 }

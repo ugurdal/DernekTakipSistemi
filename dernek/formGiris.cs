@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -13,7 +14,14 @@ namespace dernek
     public partial class formGiris : Form
     {
         baglanti _baglanti = new baglanti();
-        
+        OleDbConnection cnn = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0; " +
+                                                    @"Data Source=" + Application.StartupPath + "\\dernek.mdb; " +
+                                                    @"Jet OLEDB:Database Password=grdl;Persist Security Info=true");
+
+        private string oledbCon = @"Provider=Microsoft.Jet.OLEDB.4.0; " +
+                                  @"Data Source=" + Application.StartupPath + "\\dernek.mdb; " +
+                                  @"Jet OLEDB:Database Password=grdl;Persist Security Info=true";
+
         public formGiris()
         {
             InitializeComponent();
@@ -25,6 +33,7 @@ namespace dernek
             _baglanti.user = Properties.Settings.Default.user;
             _baglanti.password = Properties.Settings.Default.password;
             _baglanti.datasource = Properties.Settings.Default.dataSource;
+            _baglanti.oleDbConnection = oledbCon;
 
             if (!_baglanti.basla())
                 Environment.Exit(1);
@@ -37,7 +46,7 @@ namespace dernek
         }
 
         private void formGiris_KeyDown(object sender, KeyEventArgs e)
-        {
+            {
             if (e.KeyCode == Keys.Enter)
             {
                 Giris();
@@ -58,14 +67,19 @@ namespace dernek
                 return;
             }
             var dt = new DataTable();
-            new SqlDataAdapter(string.Format("Select * From dbo.kullanici Where kullaniciAdi='{0}' And Parola='{1}'", textBoxKullanici.Text, textBoxSifre.Text), _baglanti.cnn).Fill(dt);
+            //new SqlDataAdapter(string.Format("Select * From dbo.kullanici Where kullaniciAdi='{0}' And Parola='{1}'", textBoxKullanici.Text, textBoxSifre.Text), _baglanti.cnn).Fill(dt);
+            new OleDbDataAdapter(string.Format("Select * From kullanici Where kullaniciAdi='{0}' And kullaniciParola='{1}'", textBoxKullanici.Text, textBoxSifre.Text), _baglanti.oleConn).Fill(dt);
             
             if (dt.Rows.Count == 0)
             {
                 MessageBox.Show("Kullanıcı adı veya parola hatalı !", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
-            string _kullanici = dt.Rows[0]["adSoyad"].ToString();
+            string _kullanici = dt.Rows[0]["kullaniciAdSoyad"].ToString();
+
+            Properties.Settings.Default.oleDbConn = oledbCon;
+            Properties.Settings.Default.Save();
+
             
             var frm = new formMenu();
             frm.basla(_baglanti.datasource, _baglanti.database, _kullanici);

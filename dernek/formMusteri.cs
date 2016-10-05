@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace dernek
             _baglanti.user = Properties.Settings.Default.user;
             _baglanti.password = Properties.Settings.Default.password;
             _baglanti.datasource = Properties.Settings.Default.dataSource;
+            _baglanti.oleDbConnection = Properties.Settings.Default.oleDbConn;
 
             if (!_baglanti.basla())
                 Environment.Exit(1);
@@ -105,7 +107,8 @@ namespace dernek
         {
             _baglanti.ac();
             DataTable dtIl = new DataTable();
-            new SqlDataAdapter(("Select * from dbo.ilTanimlari Order By ilAdi"), _baglanti.cnn).Fill(dtIl);
+            //new SqlDataAdapter(("Select * from dbo.ilTanimlari Order By ilAdi"), _baglanti.cnn).Fill(dtIl);
+            new OleDbDataAdapter(("Select * from ilTanimlari Order By ilAdi"), _baglanti.oleConn).Fill(dtIl);
             comboBoxIl.DisplayMember = "ilAdi";
             comboBoxIl.ValueMember = "ilPlaka";
             comboBoxIl.DataSource = dtIl;
@@ -120,11 +123,13 @@ namespace dernek
 
             if (tum)
             {
-                new SqlDataAdapter(string.Format(("Select * from dbo.musteri Order By mstAd ")), _baglanti.cnn).Fill(dtMst);
+                //new SqlDataAdapter(string.Format(("Select * from dbo.musteri Order By mstAd ")), _baglanti.cnn).Fill(dtMst);
+                new OleDbDataAdapter(string.Format(("Select * from musteri Order By mstAd ")), _baglanti.oleConn).Fill(dtMst);
             }
             else
             {
-                new SqlDataAdapter(string.Format(("Select * from dbo.musteri Where {0} like '" + tsTextMusteriAra.Text + "%' Order By mstAd "), ad == true ? "mstAd" : "mstVN"), _baglanti.cnn).Fill(dtMst);
+                //new SqlDataAdapter(string.Format(("Select * from dbo.musteri Where {0} like '" + tsTextMusteriAra.Text + "%' Order By mstAd "), ad == true ? "mstAd" : "mstVN"), _baglanti.cnn).Fill(dtMst);
+                new OleDbDataAdapter(string.Format(("Select * from musteri Where {0} like '" + tsTextMusteriAra.Text + "%' Order By mstAd "), ad == true ? "mstAd" : "mstVN"), _baglanti.oleConn).Fill(dtMst);
             }
 
             dgwMusteri.DataSource = null;
@@ -154,8 +159,10 @@ namespace dernek
 
             DataTable dt = new DataTable();
             DataTable dtYetkili = new DataTable();
-            new SqlDataAdapter(string.Format(("Select * from dbo.musteri Where mstID = {0}"), mstID), _baglanti.cnn).Fill(dt);
-            new SqlDataAdapter(string.Format(("Select * from dbo.musteriYetkili Where mstYetkiliID = {0}"), mstID), _baglanti.cnn).Fill(dtYetkili);
+            //new SqlDataAdapter(string.Format(("Select * from dbo.musteri Where mstID = {0}"), mstID), _baglanti.cnn).Fill(dt);
+            //new SqlDataAdapter(string.Format(("Select * from dbo.musteriYetkili Where mstYetkiliID = {0}"), mstID), _baglanti.cnn).Fill(dtYetkili);
+            new OleDbDataAdapter(string.Format(("Select * from musteri Where mstID = {0}"), mstID), _baglanti.oleConn).Fill(dt);
+            new OleDbDataAdapter(string.Format(("Select * from musteriYetkili Where mstYetkiliID = {0}"), mstID), _baglanti.oleConn).Fill(dtYetkili);
 
             labelID.Text = dt.Rows[0]["mstID"].ToString();
             textBoxKod.Text = dt.Rows[0]["mstKod"].ToString();
@@ -199,7 +206,8 @@ namespace dernek
 
 
             DataTable dtCari = new DataTable();
-            new SqlDataAdapter(string.Format(("Select * from dbo.cariBakiye_vw Where cariMusteri={0}"), mstID), _baglanti.cnn).Fill(dtCari);
+            //new SqlDataAdapter(string.Format(("Select * from dbo.cariBakiye_vw Where cariMusteri={0}"), mstID), _baglanti.cnn).Fill(dtCari);
+            new OleDbDataAdapter(string.Format(("SELECT SUM(cariTutar) AS bakiye FROM cariIslemler WHERE cariMusteri={0} GROUP BY cariMusteri"), mstID), _baglanti.oleConn).Fill(dtCari);
 
             if (dtCari.Rows.Count > 0)
             {

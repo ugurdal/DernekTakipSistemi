@@ -1,8 +1,11 @@
 using System;
 using System.Data;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
+using DataTable = System.Data.DataTable;
 
 public class baglanti
 {
@@ -11,6 +14,19 @@ public class baglanti
     private string _password = String.Empty;
     private string _datasource = String.Empty;
     private string bag = String.Empty;
+    private string oledb = String.Empty;
+    public SqlConnection cnn = new System.Data.SqlClient.SqlConnection();
+    public OleDbConnection oleConn = new OleDbConnection();
+    public DataSet dataSet = new DataSet();
+    SqlDataAdapter adpTemp = new System.Data.SqlClient.SqlDataAdapter();
+    SqlCommand cmdTemp = new System.Data.SqlClient.SqlCommand();
+
+
+    public string oleDbConnection
+    {
+        get { return oledb; }
+        set { oledb = value; }
+    }
 
     public string database
     {
@@ -37,9 +53,8 @@ public class baglanti
     {
         try
         {
-            bag = "Data Source=" + datasource + ";Initial Catalog=" + database + "; User Id=" + user + "; password=" + password +";";
-            cnn.ConnectionString = bag;
-            cnn.Open();
+            oleConn.ConnectionString = oledb;
+            oleConn.Open();
         }
         catch (Exception)
         {
@@ -47,45 +62,68 @@ public class baglanti
             return false;
         }
         return true;
+
+        //try
+        //{
+        //    bag = "Data Source=" + datasource + ";Initial Catalog=" + database + "; User Id=" + user + "; password=" + password +";";
+        //    cnn.ConnectionString = bag;
+        //    cnn.Open();
+        //}
+        //catch (Exception)
+        //{
+        //    MessageBox.Show("Bağlantı Hatası");
+        //    return false;
+        //}
+        //return true;
     }
     
-    //public DerinSisComp.cDrnSisComp drn = new DerinSisComp.cDrnSisComp();
-    
-    public SqlConnection cnn = new System.Data.SqlClient.SqlConnection();
-    public DataSet dataSet = new DataSet();
-    SqlDataAdapter adpTemp = new System.Data.SqlClient.SqlDataAdapter();
-    SqlCommand cmdTemp = new System.Data.SqlClient.SqlCommand();
-
-
     public void ac()
     {
         try
         {
-            if (cnn.State == ConnectionState.Closed)
+            if (oleConn.State == ConnectionState.Closed)
             {
-                cnn.ConnectionString = bag;
-                cnn.Open();
+                oleConn.ConnectionString = oledb;
+                oleConn.Open();
             }
         }
         catch (Exception)
         {
             MessageBox.Show("Bağlantı Hatası");
         }
-
+        //try
+        //{
+        //    if (cnn.State == ConnectionState.Closed)
+        //    {
+        //        cnn.ConnectionString = bag;
+        //        cnn.Open();
+        //    }
+        //}
+        //catch (Exception)
+        //{
+        //    MessageBox.Show("Bağlantı Hatası");
+        //}
     }
 
     public void kapat()
     {
-        if (cnn.State == ConnectionState.Open)
+        if (oleConn.State == ConnectionState.Open)
         {
-            cnn.Close();
+            oleConn.Close();
         }
-        cnn.Dispose();
+        oleConn.Dispose();
+        //if (cnn.State == ConnectionState.Open)
+        //{
+        //    cnn.Close();
+        //}
+        //cnn.Dispose();
     }
     public void programKapat() //formClosing eventinde calistir
     {
-        cnn.Dispose();
+        oleConn.Dispose();
         kapat();
+        //cnn.Dispose();
+        //kapat();
     }
 
 

@@ -73,6 +73,7 @@
             this.tbAlacak = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.tbBakiye = new System.Windows.Forms.ToolStripTextBox();
+            this.tsMusteriAd = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -479,7 +480,8 @@
             this.toolStripLabel2,
             this.tbAlacak,
             this.toolStripLabel3,
-            this.tbBakiye});
+            this.tbBakiye,
+            this.tsMusteriAd});
             this.toolStripCariUst.Location = new System.Drawing.Point(0, 0);
             this.toolStripCariUst.Name = "toolStripCariUst";
             this.toolStripCariUst.Size = new System.Drawing.Size(718, 27);
@@ -545,6 +547,15 @@
             this.tbBakiye.Size = new System.Drawing.Size(116, 25);
             this.tbBakiye.Text = "0";
             this.tbBakiye.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tsMusteriAd
+            // 
+            this.tsMusteriAd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsMusteriAd.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
+            this.tsMusteriAd.Name = "tsMusteriAd";
+            this.tsMusteriAd.Size = new System.Drawing.Size(75, 24);
+            this.tsMusteriAd.Text = "tsMusteriAd";
+            this.tsMusteriAd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // formCari
             // 
@@ -633,5 +644,6 @@
         private System.Windows.Forms.MonthCalendar islemTarihi;
         private System.Windows.Forms.Label labelKod;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripLabel tsMusteriAd;
     }
 }

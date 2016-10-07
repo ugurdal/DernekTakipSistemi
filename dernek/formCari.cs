@@ -32,6 +32,23 @@ namespace dernek
             tsAdAra.Checked = false;
         }
 
+        public void basla(int _mstID, string _mstAd)
+        {
+            _baglanti.oleDbConnection = Properties.Settings.Default.oleDbConn;
+            if (!_baglanti.basla())
+                Environment.Exit(1);
+            ArayuzDoldur();
+            Temizle();
+            islemTarihi.MaxDate = DateTime.Today;
+            tbBakiye.Text = "0";
+            tbBorc.Text = "0";
+            tbAlacak.Text = "0";
+            tsMusteriAd.Text = _mstAd;
+            musteriID = _mstID;
+            labelKod.Text = musteriID.ToString();
+            CariHareketDoldur(_mstID);
+        }
+
         private void formCari_Load(object sender, EventArgs e)
         {
             _baglanti.database = Properties.Settings.Default.database;
@@ -49,7 +66,6 @@ namespace dernek
             islemTarihi.MaxDate = DateTime.Today;
             ArayuzDoldur();
             Temizle();
-            gbCari.Enabled = false;
         }
 
         private void tsTumMusteriler_Click(object sender, EventArgs e)
@@ -143,6 +159,7 @@ namespace dernek
                 tbBakiye.Text = "0";
                 tbBorc.Text = "0";
                 tbAlacak.Text = "0";
+                tsMusteriAd.Text = dgwMusteriCari.Rows[e.RowIndex].Cells[0].Value.ToString();
                 Temizle();
                 gbCari.Enabled = true;
                 musteriID = int.Parse(dgwMusteriCari.Rows[e.RowIndex].Cells[1].Value.ToString());
@@ -166,7 +183,7 @@ namespace dernek
                                                 ",DSum(\"cariTutar\",\"cariIslemler\",\"cariID <= \" & cariID ) AS Bakiye, cariNot as Notlar " +
                                                 ",cariMusteri as [MüşteriID],  cariTip as [TipId],cariBA " +
                                                 " FROM cariIslemler INNER JOIN cariIslemTip ON cariIslemTip.islemID = cariIslemler.cariTip " +
-                                                " WHERE cariMusteri={0} ORDER BY cariTarih,cariID"),mstID), _baglanti.oleConn).Fill(dtCari);
+                                                " WHERE cariMusteri={0} ORDER BY cariTarih,cariID"), mstID), _baglanti.oleConn).Fill(dtCari);
 
             double sum = 0;
             foreach (DataRow dr in dtCari.Rows)
@@ -175,13 +192,14 @@ namespace dernek
                 dr["Bakiye"] = sum;
             }
 
-            if (dtCari.Rows.Count == 0)
-                return;
+            if (dtCari.Rows.Count > 0)
+            {
+                dgwCari.DataSource = dtCari;
+                DataGridFormatla(dgwCari);
+                //dgwCari.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                //dgwCari.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
 
-            dgwCari.DataSource = dtCari;
-            DataGridFormatla(dgwCari);
-            //dgwCari.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            //dgwCari.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             _baglanti.kapat();
             BakiyeOku(mstID);
         }
@@ -218,7 +236,12 @@ namespace dernek
                                                 "SUM(cariTutar) as bakiye FROM cariIslemler WHERE cariMusteri={0}"), mstID), _baglanti.oleConn).Fill(dtCari);
 
             if (dtCari.Rows.Count == 0)
+            {
+                tbBakiye.Text = "0";
+                tbAlacak.Text = "0";
+                tbBorc.Text = "0";
                 return;
+            }
 
             tbBakiye.Text = _baglanti.ParaFormat(dtCari.Rows[0]["bakiye"].ToString());
             tbAlacak.Text = _baglanti.ParaFormat(dtCari.Rows[0]["alacak"].ToString());
@@ -264,7 +287,7 @@ namespace dernek
             {
                 _baglanti.ac();
                 var tutar = comboboxBA.SelectedIndex == 0 ? double.Parse(textBoxTutar.Text.Replace("-", "")) : -1 * double.Parse(textBoxTutar.Text.Replace("-", ""));
-                
+
                 if (labelID.Text != "0")
                 {
                     var car = new OleDbCommand();
@@ -421,7 +444,7 @@ namespace dernek
             {
                 //var sil = new SqlCommand("dbo.cari_sil", _baglanti.cnn);
                 //sil.CommandType = CommandType.StoredProcedure;
-                var sil = new OleDbCommand(string.Format("DELETE * FROM cariIslemler WHERE cariID={0} ",cariID), _baglanti.oleConn);
+                var sil = new OleDbCommand(string.Format("DELETE * FROM cariIslemler WHERE cariID={0} ", cariID), _baglanti.oleConn);
                 //sil.Parameters.AddWithValue("@cID", cariID);
                 sil.CommandTimeout = 3000;
                 sil.ExecuteNonQuery();

@@ -660,5 +660,17 @@ namespace dernek
 
         }
 
+        private void tsCari_Click(object sender, EventArgs e)
+        {
+            if (labelID.Text == "0")
+            {
+                MessageBox.Show("Önce müşteri seçiniz");
+                return;
+            }
+            var frmCari = new formCari();
+            frmCari.basla(Convert.ToInt32(labelID.Text), textBoxAd.Text);
+            frmCari.ShowDialog();
+        }
+
     }
 }

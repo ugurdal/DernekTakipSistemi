@@ -103,6 +103,7 @@
             this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.tsCari = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -770,7 +771,8 @@
             this.toolStripSeparator,
             this.cutToolStripButton,
             this.toolStripSeparator1,
-            this.helpToolStripButton});
+            this.helpToolStripButton,
+            this.tsCari});
             this.toolStripMusteri.Location = new System.Drawing.Point(0, 0);
             this.toolStripMusteri.Name = "toolStripMusteri";
             this.toolStripMusteri.Size = new System.Drawing.Size(830, 25);
@@ -831,6 +833,16 @@
             this.helpToolStripButton.Name = "helpToolStripButton";
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
+            // 
+            // tsCari
+            // 
+            this.tsCari.Image = global::dernek.Properties.Resources.database;
+            this.tsCari.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsCari.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
+            this.tsCari.Name = "tsCari";
+            this.tsCari.Size = new System.Drawing.Size(121, 22);
+            this.tsCari.Text = "Cari İşlemlere Geç";
+            this.tsCari.Click += new System.EventHandler(this.tsCari_Click);
             // 
             // formMusteri
             // 
@@ -947,6 +959,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn yetkiliID;
         private System.Windows.Forms.TextBox textBoxBakiye;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ToolStripButton tsCari;
     }
 }
 

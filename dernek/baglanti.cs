@@ -76,7 +76,7 @@ public class baglanti
         //}
         //return true;
     }
-    
+
     public void ac()
     {
         try
@@ -243,10 +243,14 @@ public class baglanti
 
     public string ParaFormat(string tutar)
     {
-        System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("tr-TR");
-        double valueBefore = double.Parse(tutar);
-        string sonuc = String.Format(culture, "{0:N2}", valueBefore);
-        return sonuc;
+        if (tutar != "")
+        {
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("tr-TR");
+            double valueBefore = double.Parse(tutar);
+            string sonuc = String.Format(culture, "{0:N2}", valueBefore);
+            return sonuc;
+        }
+        return tutar;
     }
 
     public bool EpostaKontrol(string eposta)

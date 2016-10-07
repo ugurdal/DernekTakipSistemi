@@ -34,34 +34,43 @@
             this.labelSunucu = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelDatabase = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.gbCari = new System.Windows.Forms.GroupBox();
-            this.pbCari = new System.Windows.Forms.PictureBox();
             this.gbMusteri = new System.Windows.Forms.GroupBox();
-            this.pbMusteri = new System.Windows.Forms.PictureBox();
             this.gbKullanici = new System.Windows.Forms.GroupBox();
-            this.pbKullanici = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.gbRapor = new System.Windows.Forms.GroupBox();
-            this.pbRapor = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.notlar = new System.Windows.Forms.RichTextBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pbCari = new System.Windows.Forms.PictureBox();
+            this.pbMusteri = new System.Windows.Forms.PictureBox();
+            this.pbKullanici = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pbRapor = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.gbCari.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCari)).BeginInit();
             this.gbMusteri.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMusteri)).BeginInit();
             this.gbKullanici.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbKullanici)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.gbRapor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRapor)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCari)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMusteri)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbKullanici)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRapor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,17 +122,6 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "groupBox7";
             // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackgroundImage = global::dernek.Properties.Resources.wave2;
-            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox6.Location = new System.Drawing.Point(3, 18);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(148, 90);
-            this.pictureBox6.TabIndex = 8;
-            this.pictureBox6.TabStop = false;
-            // 
             // gbCari
             // 
             this.gbCari.Controls.Add(this.pbCari);
@@ -134,22 +132,6 @@
             this.gbCari.TabIndex = 10;
             this.gbCari.TabStop = false;
             this.gbCari.Text = "Cari İşlemler";
-            // 
-            // pbCari
-            // 
-            this.pbCari.BackgroundImage = global::dernek.Properties.Resources.wave2;
-            this.pbCari.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbCari.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbCari.Image = global::dernek.Properties.Resources.cari1;
-            this.pbCari.Location = new System.Drawing.Point(3, 18);
-            this.pbCari.Name = "pbCari";
-            this.pbCari.Size = new System.Drawing.Size(148, 90);
-            this.pbCari.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbCari.TabIndex = 8;
-            this.pbCari.TabStop = false;
-            this.pbCari.Click += new System.EventHandler(this.pbCari_Click);
-            this.pbCari.MouseEnter += new System.EventHandler(this.pbCari_MouseEnter);
-            this.pbCari.MouseLeave += new System.EventHandler(this.pbCari_MouseLeave);
             // 
             // gbMusteri
             // 
@@ -163,22 +145,6 @@
             this.gbMusteri.TabStop = false;
             this.gbMusteri.Text = "Müşteri Tanımları";
             // 
-            // pbMusteri
-            // 
-            this.pbMusteri.BackgroundImage = global::dernek.Properties.Resources.wave2;
-            this.pbMusteri.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbMusteri.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbMusteri.Image = global::dernek.Properties.Resources.customer;
-            this.pbMusteri.Location = new System.Drawing.Point(3, 18);
-            this.pbMusteri.Name = "pbMusteri";
-            this.pbMusteri.Size = new System.Drawing.Size(148, 90);
-            this.pbMusteri.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbMusteri.TabIndex = 8;
-            this.pbMusteri.TabStop = false;
-            this.pbMusteri.Click += new System.EventHandler(this.pbMusteri_Click);
-            this.pbMusteri.MouseEnter += new System.EventHandler(this.pbMusteri_MouseEnter);
-            this.pbMusteri.MouseLeave += new System.EventHandler(this.pbMusteri_MouseLeave);
-            // 
             // gbKullanici
             // 
             this.gbKullanici.Controls.Add(this.pbKullanici);
@@ -189,19 +155,6 @@
             this.gbKullanici.TabIndex = 10;
             this.gbKullanici.TabStop = false;
             this.gbKullanici.Text = "Kullanici Tanimlari";
-            // 
-            // pbKullanici
-            // 
-            this.pbKullanici.BackgroundImage = global::dernek.Properties.Resources.wave2;
-            this.pbKullanici.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbKullanici.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbKullanici.Image = global::dernek.Properties.Resources.user1;
-            this.pbKullanici.Location = new System.Drawing.Point(3, 18);
-            this.pbKullanici.Name = "pbKullanici";
-            this.pbKullanici.Size = new System.Drawing.Size(148, 90);
-            this.pbKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbKullanici.TabIndex = 8;
-            this.pbKullanici.TabStop = false;
             // 
             // groupBox3
             // 
@@ -214,17 +167,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::dernek.Properties.Resources.wave2;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 18);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(148, 90);
-            this.pictureBox2.TabIndex = 8;
-            this.pictureBox2.TabStop = false;
-            // 
             // gbRapor
             // 
             this.gbRapor.Controls.Add(this.pbRapor);
@@ -236,23 +178,9 @@
             this.gbRapor.TabStop = false;
             this.gbRapor.Text = "Raporlar";
             // 
-            // pbRapor
-            // 
-            this.pbRapor.BackgroundImage = global::dernek.Properties.Resources.wave2;
-            this.pbRapor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbRapor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbRapor.Image = global::dernek.Properties.Resources.rapor;
-            this.pbRapor.Location = new System.Drawing.Point(3, 18);
-            this.pbRapor.Name = "pbRapor";
-            this.pbRapor.Size = new System.Drawing.Size(148, 90);
-            this.pbRapor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbRapor.TabIndex = 8;
-            this.pbRapor.TabStop = false;
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.BackgroundImage = global::dernek.Properties.Resources.wave2;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.groupBox1.Controls.Add(this.notlar);
             this.groupBox1.Location = new System.Drawing.Point(707, 12);
@@ -273,10 +201,156 @@
             this.notlar.TabIndex = 0;
             this.notlar.Text = "";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.linkLabel1.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.linkLabel1.Location = new System.Drawing.Point(57, 442);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(185, 13);
+            this.linkLabel1.TabIndex = 13;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://www.facebook.com/ugurdal0";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.linkLabel2.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.linkLabel2.Location = new System.Drawing.Point(57, 499);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(139, 13);
+            this.linkLabel2.TabIndex = 16;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "https://twitter.com/ugurdal";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.linkLabel3.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.linkLabel3.Location = new System.Drawing.Point(57, 470);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(186, 13);
+            this.linkLabel3.TabIndex = 17;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "https://www.instagram.com/ugurrdal";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox5.Image = global::dernek.Properties.Resources.ins;
+            this.pictureBox5.InitialImage = null;
+            this.pictureBox5.Location = new System.Drawing.Point(26, 465);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox5.TabIndex = 15;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox4.Image = global::dernek.Properties.Resources.twitter;
+            this.pictureBox4.InitialImage = null;
+            this.pictureBox4.Location = new System.Drawing.Point(26, 493);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox4.TabIndex = 14;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox3.Image = global::dernek.Properties.Resources.face1;
+            this.pictureBox3.InitialImage = null;
+            this.pictureBox3.Location = new System.Drawing.Point(26, 437);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox3.TabIndex = 11;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox6.Location = new System.Drawing.Point(3, 18);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(148, 90);
+            this.pictureBox6.TabIndex = 8;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pbCari
+            // 
+            this.pbCari.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbCari.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbCari.Image = global::dernek.Properties.Resources.calculate;
+            this.pbCari.Location = new System.Drawing.Point(3, 18);
+            this.pbCari.Name = "pbCari";
+            this.pbCari.Size = new System.Drawing.Size(148, 90);
+            this.pbCari.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbCari.TabIndex = 8;
+            this.pbCari.TabStop = false;
+            this.pbCari.Click += new System.EventHandler(this.pbCari_Click);
+            this.pbCari.MouseEnter += new System.EventHandler(this.pbCari_MouseEnter);
+            this.pbCari.MouseLeave += new System.EventHandler(this.pbCari_MouseLeave);
+            // 
+            // pbMusteri
+            // 
+            this.pbMusteri.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbMusteri.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbMusteri.Image = global::dernek.Properties.Resources.customer2;
+            this.pbMusteri.Location = new System.Drawing.Point(3, 18);
+            this.pbMusteri.Name = "pbMusteri";
+            this.pbMusteri.Size = new System.Drawing.Size(148, 90);
+            this.pbMusteri.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbMusteri.TabIndex = 8;
+            this.pbMusteri.TabStop = false;
+            this.pbMusteri.Click += new System.EventHandler(this.pbMusteri_Click);
+            this.pbMusteri.MouseEnter += new System.EventHandler(this.pbMusteri_MouseEnter);
+            this.pbMusteri.MouseLeave += new System.EventHandler(this.pbMusteri_MouseLeave);
+            // 
+            // pbKullanici
+            // 
+            this.pbKullanici.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbKullanici.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbKullanici.Image = global::dernek.Properties.Resources.user2;
+            this.pbKullanici.Location = new System.Drawing.Point(3, 18);
+            this.pbKullanici.Name = "pbKullanici";
+            this.pbKullanici.Size = new System.Drawing.Size(148, 90);
+            this.pbKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbKullanici.TabIndex = 8;
+            this.pbKullanici.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 18);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(148, 90);
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pbRapor
+            // 
+            this.pbRapor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbRapor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbRapor.Image = global::dernek.Properties.Resources.report;
+            this.pbRapor.Location = new System.Drawing.Point(3, 18);
+            this.pbRapor.Name = "pbRapor";
+            this.pbRapor.Size = new System.Drawing.Size(148, 90);
+            this.pbRapor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbRapor.TabIndex = 8;
+            this.pbRapor.TabStop = false;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::dernek.Properties.Resources.wave2;
+            this.pictureBox1.Image = global::dernek.Properties.Resources.contact_form_background;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(967, 531);
@@ -289,6 +363,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(967, 553);
+            this.Controls.Add(this.linkLabel3);
+            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.gbCari);
             this.Controls.Add(this.gbMusteri);
@@ -311,18 +391,21 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.gbCari.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbCari)).EndInit();
             this.gbMusteri.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbMusteri)).EndInit();
             this.gbKullanici.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbKullanici)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.gbRapor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbRapor)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCari)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMusteri)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbKullanici)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRapor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -350,5 +433,11 @@
         private System.Windows.Forms.PictureBox pbCari;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel3;
     }
 }

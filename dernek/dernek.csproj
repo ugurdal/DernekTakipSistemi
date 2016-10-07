@@ -125,6 +125,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="file.ico" />
+    <None Include="Resources\twitter.png" />
+    <None Include="Resources\ins.png" />
+    <None Include="Resources\face1.png" />
+    <None Include="Resources\face.png" />
+    <None Include="Resources\band_1.jpg" />
+    <None Include="Resources\user2.png" />
+    <None Include="Resources\calculate.png" />
+    <None Include="Resources\customer2.png" />
+    <None Include="Resources\customer1.png" />
+    <None Include="Resources\report.png" />
+    <None Include="Resources\contact-form-background2.jpg" />
     <None Include="Resources\NewDocumentHS.png" />
     <None Include="Resources\wave2.jpeg" />
     <None Include="Resources\wave6.jpg" />

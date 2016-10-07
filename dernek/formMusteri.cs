@@ -40,7 +40,7 @@ namespace dernek
             comboBoxIl.SelectedValue = 34;
             Temizle();
             tsAdArama.Checked = true;
-
+            dgwYetkili.Enabled = false;
         }
 
         private void tsAdArama_Click(object sender, EventArgs e)
@@ -234,115 +234,204 @@ namespace dernek
             try
             {
                 _baglanti.ac();
-                var mst = new SqlCommand("dbo.musteri_ekle", _baglanti.cnn);
-                mst.CommandType = CommandType.StoredProcedure;
-                SqlParameter id = mst.Parameters.Add("@id", SqlDbType.Int);
-                id.Direction = ParameterDirection.ReturnValue;
-                mst.Parameters.AddWithValue("@id", labelID.Text);
-                mst.Parameters.AddWithValue("@kod", textBoxKod.Text);
-                mst.Parameters.AddWithValue("@ad", textBoxAd.Text);
-                mst.Parameters.AddWithValue("@tip", comboBoxMusteriTip.SelectedIndex);
-                mst.Parameters.AddWithValue("@vd", textBoxVD.Text);
-                mst.Parameters.AddWithValue("@vn", textBoxVN.Text);
-                mst.Parameters.AddWithValue("@adres", textBoxAdres.Text);
-                mst.Parameters.AddWithValue("@il", comboBoxIl.SelectedValue);
-                mst.Parameters.AddWithValue("@ilce", textBoxIlce.Text);
-                mst.Parameters.AddWithValue("@tel1", mTextBoxTel1.Text.Replace(" ", ""));
-                mst.Parameters.AddWithValue("@tel2", mTextBoxTel2.Text.Replace(" ", ""));
-                mst.Parameters.AddWithValue("@gsm", mTextBoxGsm.Text.Replace(" ", ""));
-                mst.Parameters.AddWithValue("@faks", mTextBoxTelFaks.Text.Replace(" ", ""));
-                mst.Parameters.AddWithValue("@eposta", textBoxEPosta.Text);
-                mst.Parameters.AddWithValue("@not", textBoxNot.Text);
-                mst.Parameters.AddWithValue("@gtarih", DateTime.Now);
-                mst.Parameters.AddWithValue("@ktarih", DateTime.Now);
-                mst.Parameters.AddWithValue("@kurulusTarih", dtpKurulus.Value.ToShortDateString());
-                mst.Parameters.AddWithValue("@kurulTarih", dtpGenelKurul.Value.ToShortDateString());
-                mst.Parameters.AddWithValue("@tc", textBoxTCNo.Text);
-                mst.Parameters.AddWithValue("@kullanici", textBoxKullanici.Text);
-                mst.Parameters.AddWithValue("@sifre", textBoxSifre.Text);
 
-                mst.CommandTimeout = 3000;
-                mst.ExecuteNonQuery();
-                labelID.Text = id.Value.ToString();
-
-                var ytk = new SqlCommand("dbo.musteri_yetkili_ekle", _baglanti.cnn);
-                ytk.CommandType = CommandType.StoredProcedure;
-                SqlParameter yId = mst.Parameters.Add("@id", SqlDbType.Int);
-                yId.Direction = ParameterDirection.ReturnValue;
-                ytk.Parameters.Add("@id", SqlDbType.Int);
-                ytk.Parameters.Add("@mstID", SqlDbType.Int);
-                ytk.Parameters.Add("@ad", SqlDbType.VarChar);
-                ytk.Parameters.Add("@tel", SqlDbType.VarChar);
-                ytk.Parameters.Add("@gsm", SqlDbType.VarChar);
-                ytk.Parameters.Add("@dahili", SqlDbType.VarChar);
-                ytk.Parameters.Add("@eposta", SqlDbType.VarChar);
-                ytk.Parameters.Add("@unvan", SqlDbType.VarChar);
-
-                foreach (DataGridViewRow rw in dgwYetkili.Rows)
+                if (labelID.Text != "0")
                 {
-                    if (rw.Index != dgwYetkili.Rows.Count - 1)
-                    {
-                        ytk.Parameters["@id"].Value = rw.Cells["yetkiliID"].Value == null ? "0" : rw.Cells["yetkiliID"].Value;
-                        ytk.Parameters["@mstID"].Value = labelID.Text;
-                        ytk.Parameters["@ad"].Value = rw.Cells["yetkiliAdi"].Value;
-                        ytk.Parameters["@tel"].Value = rw.Cells["yetkiliTel"].Value == null ? "" : rw.Cells["yetkiliTel"].Value;
-                        ytk.Parameters["@gsm"].Value = rw.Cells["yetkiliGSM"].Value == null ? "" : rw.Cells["yetkiliGSM"].Value;
-                        ytk.Parameters["@dahili"].Value = rw.Cells["yetkiliDahili"].Value == null ? "" : rw.Cells["yetkiliDahili"].Value;
-                        ytk.Parameters["@eposta"].Value = rw.Cells["yetkiliEposta"].Value == null ? "" : rw.Cells["yetkiliEposta"].Value;
-                        ytk.Parameters["@unvan"].Value = rw.Cells["yetkiliUnvan"].Value == null ? "" : rw.Cells["yetkiliUnvan"].Value;
+                    var mstKaydet = new OleDbCommand();
+                    mstKaydet.Connection = _baglanti.oleConn;
+                    mstKaydet.CommandType = CommandType.Text;
+                    mstKaydet.CommandText = " UPDATE musteri " +
+                                            " SET mstKod='" + textBoxKod.Text + "'" +
+                                                ", mstAd='" + textBoxAd.Text + "'" +
+                                                ", mstTip=" + comboBoxMusteriTip.SelectedIndex +
+                                                ", mstVD='" + textBoxVD.Text + "'" +
+                                                ", mstVN='" + textBoxVN.Text + "'" +
+                                                ", mstAdres='" + textBoxAdres.Text + "'" +
+                                                ", mstIl=" + comboBoxIl.SelectedValue +
+                                                ", mstIlce='" + textBoxIlce.Text + "'" +
+                                                ", mstTel1='" + mTextBoxTel1.Text.Replace(" ", "") + "'" +
+                                                ", mstTel2='" + mTextBoxTel2.Text.Replace(" ", "") + "'" +
+                                                ", mstGsm='" + mTextBoxGsm.Text.Replace(" ", "") + "'" +
+                                                ", mstFaks='" + mTextBoxTelFaks.Text.Replace(" ", "") + "'" +
+                                                ", mstEposta='" + textBoxEPosta.Text + "'" +
+                                                ", mstNot='" + textBoxNot.Text + "'" +
+                                                ", mstKtarih='" + DateTime.Now + "'" +
+                                                ", mstKurulusTarih='" + dtpKurulus.Value.ToShortDateString() + "'" +
+                                                ", mstGenelKurulTarih='" + dtpGenelKurul.Value.ToShortDateString() + "'" +
+                                                ", mstTcNo='" + textBoxTCNo.Text + "'" +
+                                                ", mstKullaniciKodu='" + textBoxKullanici.Text + "'" +
+                                                ", mstSifre='" + textBoxSifre.Text + "'" +
+                                            " WHERE mstID=" + labelID.Text;
+                    mstKaydet.ExecuteNonQuery();
+                    MessageBox.Show("Güncellendi !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    var IDBul = new OleDbCommand("Select @@Identity", _baglanti.oleConn);
+                    IDBul.CommandType = CommandType.Text;
+                    IDBul.CommandTimeout = 3000;
 
-                        ytk.CommandTimeout = 3000;
-                        ytk.ExecuteNonQuery();
-                    }
+                    var mstKaydet = new OleDbCommand();
+                    mstKaydet.Connection = _baglanti.oleConn;
+                    mstKaydet.CommandType = CommandType.Text;
+                    mstKaydet.CommandTimeout = 3000;
+                    mstKaydet.CommandText = " INSERT INTO musteri (mstKod,mstAd ,mstTip ,mstVD ,mstVN ,mstAdres ,mstIl ,mstIlce ,mstTel1 ,mstTel2 ,mstGsm ,mstFaks ,mstEposta " +
+		                                    "                        ,mstNot ,mstGtarih ,mstKtarih ,mstKurulusTarih ,mstGenelKurulTarih ,mstTcNo ,mstKullaniciKodu ,mstSifre) " +
+                                            " SELECT '" + textBoxKod.Text + "'" +
+                                                ", '" + textBoxAd.Text + "'" +
+                                                ", " + comboBoxMusteriTip.SelectedIndex +
+                                                ", '" + textBoxVD.Text + "'" +
+                                                ", '" + textBoxVN.Text + "'" +
+                                                ", '" + textBoxAdres.Text + "'" +
+                                                ", " + comboBoxIl.SelectedValue +
+                                                ", '" + textBoxIlce.Text + "'" +
+                                                ", '" + mTextBoxTel1.Text.Replace(" ", "") + "'" +
+                                                ", '" + mTextBoxTel2.Text.Replace(" ", "") + "'" +
+                                                ", '" + mTextBoxGsm.Text.Replace(" ", "") + "'" +
+                                                ", '" + mTextBoxTelFaks.Text.Replace(" ", "") + "'" +
+                                                ", '" + textBoxEPosta.Text + "'" +
+                                                ", '" + textBoxNot.Text + "'" +
+                                                ", '" + DateTime.Now + "'" +
+                                                ", '" + DateTime.Now + "'" +
+                                                ", '" + dtpKurulus.Value.ToShortDateString() + "'" +
+                                                ", '" + dtpGenelKurul.Value.ToShortDateString() + "'" +
+                                                ", '" + textBoxTCNo.Text + "'" +
+                                                ", '" + textBoxKullanici.Text + "'" +
+                                                ", '" + textBoxSifre.Text + "'" ;
+                    mstKaydet.ExecuteNonQuery();
+                    labelID.Text = IDBul.ExecuteScalar().ToString();
+                    MessageBox.Show("Kaydedildi !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
 
 
-                if (ytkSil.Count > 0)
-                {
-                    var sil = new SqlCommand("Delete dbo.musteriYetkili where yetkiliID=@id", _baglanti.cnn);
-                    sil.Parameters.Add("@id", SqlDbType.Int);
-                    sil.CommandType = CommandType.Text;
-
-                    foreach (int i in ytkSil)
-                    {
-                        sil.Parameters["@id"].Value = i.ToString();
-                        sil.CommandTimeout = 3000;
-                        sil.ExecuteNonQuery();
-                    }
-                }
-
-
-                var dt = new DataTable();
-                new SqlDataAdapter(string.Format(("Select * from dbo.musteriYetkili Where mstYetkiliID = {0}"), labelID.Text), _baglanti.cnn).Fill(dt);
-                dgwYetkili.Rows.Clear();
-                dgwYetkili.DataSource = null;
-                if (dt.Rows.Count > 0)
-                {
-                    dgwYetkili.Rows.Add(dt.Rows.Count);
-                    int i = new int();
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        dgwYetkili.Rows[i].Cells["yetkiliAdi"].Value = dr["yetkiliAd"].ToString();
-                        dgwYetkili.Rows[i].Cells["yetkiliGSM"].Value = dr["yetkiliGsm"].ToString();
-                        dgwYetkili.Rows[i].Cells["yetkiliTel"].Value = dr["yetkiliTel"].ToString();
-                        dgwYetkili.Rows[i].Cells["yetkiliDahili"].Value = dr["yetkiliDahili"].ToString();
-                        dgwYetkili.Rows[i].Cells["yetkiliUnvan"].Value = dr["yetkiliUnvan"].ToString();
-                        dgwYetkili.Rows[i].Cells["yetkiliEposta"].Value = dr["yetkiliEposta"].ToString();
-                        dgwYetkili.Rows[i].Cells["yetkiliId"].Value = dr["yetkiliID"].ToString();
-                        i++;
-                    }
-                }
-
-                MessageBox.Show("Kaydedildi !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-            ytkSil.Clear();
             _baglanti.kapat();
         }
+
+
+
+
+        //private void Kaydet()
+        //{
+        //    if (!KaydetKontroller())
+        //        return;
+        //    try
+        //    {
+        //        _baglanti.ac();
+        //        var mst = new SqlCommand("dbo.musteri_ekle", _baglanti.cnn);
+        //        mst.CommandType = CommandType.StoredProcedure;
+        //        SqlParameter id = mst.Parameters.Add("@id", SqlDbType.Int);
+        //        id.Direction = ParameterDirection.ReturnValue;
+        //        mst.Parameters.AddWithValue("@id", labelID.Text);
+        //        mst.Parameters.AddWithValue("@kod", textBoxKod.Text);
+        //        mst.Parameters.AddWithValue("@ad", textBoxAd.Text);
+        //        mst.Parameters.AddWithValue("@tip", comboBoxMusteriTip.SelectedIndex);
+        //        mst.Parameters.AddWithValue("@vd", textBoxVD.Text);
+        //        mst.Parameters.AddWithValue("@vn", textBoxVN.Text);
+        //        mst.Parameters.AddWithValue("@adres", textBoxAdres.Text);
+        //        mst.Parameters.AddWithValue("@il", comboBoxIl.SelectedValue);
+        //        mst.Parameters.AddWithValue("@ilce", textBoxIlce.Text);
+        //        mst.Parameters.AddWithValue("@tel1", mTextBoxTel1.Text.Replace(" ", ""));
+        //        mst.Parameters.AddWithValue("@tel2", mTextBoxTel2.Text.Replace(" ", ""));
+        //        mst.Parameters.AddWithValue("@gsm", mTextBoxGsm.Text.Replace(" ", ""));
+        //        mst.Parameters.AddWithValue("@faks", mTextBoxTelFaks.Text.Replace(" ", ""));
+        //        mst.Parameters.AddWithValue("@eposta", textBoxEPosta.Text);
+        //        mst.Parameters.AddWithValue("@not", textBoxNot.Text);
+        //        mst.Parameters.AddWithValue("@gtarih", DateTime.Now);
+        //        mst.Parameters.AddWithValue("@ktarih", DateTime.Now);
+        //        mst.Parameters.AddWithValue("@kurulusTarih", dtpKurulus.Value.ToShortDateString());
+        //        mst.Parameters.AddWithValue("@kurulTarih", dtpGenelKurul.Value.ToShortDateString());
+        //        mst.Parameters.AddWithValue("@tc", textBoxTCNo.Text);
+        //        mst.Parameters.AddWithValue("@kullanici", textBoxKullanici.Text);
+        //        mst.Parameters.AddWithValue("@sifre", textBoxSifre.Text);
+
+        //        mst.CommandTimeout = 3000;
+        //        mst.ExecuteNonQuery();
+        //        labelID.Text = id.Value.ToString();
+
+        //        var ytk = new SqlCommand("dbo.musteri_yetkili_ekle", _baglanti.cnn);
+        //        ytk.CommandType = CommandType.StoredProcedure;
+        //        SqlParameter yId = mst.Parameters.Add("@id", SqlDbType.Int);
+        //        yId.Direction = ParameterDirection.ReturnValue;
+        //        ytk.Parameters.Add("@id", SqlDbType.Int);
+        //        ytk.Parameters.Add("@mstID", SqlDbType.Int);
+        //        ytk.Parameters.Add("@ad", SqlDbType.VarChar);
+        //        ytk.Parameters.Add("@tel", SqlDbType.VarChar);
+        //        ytk.Parameters.Add("@gsm", SqlDbType.VarChar);
+        //        ytk.Parameters.Add("@dahili", SqlDbType.VarChar);
+        //        ytk.Parameters.Add("@eposta", SqlDbType.VarChar);
+        //        ytk.Parameters.Add("@unvan", SqlDbType.VarChar);
+
+        //        foreach (DataGridViewRow rw in dgwYetkili.Rows)
+        //        {
+        //            if (rw.Index != dgwYetkili.Rows.Count - 1)
+        //            {
+        //                ytk.Parameters["@id"].Value = rw.Cells["yetkiliID"].Value == null ? "0" : rw.Cells["yetkiliID"].Value;
+        //                ytk.Parameters["@mstID"].Value = labelID.Text;
+        //                ytk.Parameters["@ad"].Value = rw.Cells["yetkiliAdi"].Value;
+        //                ytk.Parameters["@tel"].Value = rw.Cells["yetkiliTel"].Value == null ? "" : rw.Cells["yetkiliTel"].Value;
+        //                ytk.Parameters["@gsm"].Value = rw.Cells["yetkiliGSM"].Value == null ? "" : rw.Cells["yetkiliGSM"].Value;
+        //                ytk.Parameters["@dahili"].Value = rw.Cells["yetkiliDahili"].Value == null ? "" : rw.Cells["yetkiliDahili"].Value;
+        //                ytk.Parameters["@eposta"].Value = rw.Cells["yetkiliEposta"].Value == null ? "" : rw.Cells["yetkiliEposta"].Value;
+        //                ytk.Parameters["@unvan"].Value = rw.Cells["yetkiliUnvan"].Value == null ? "" : rw.Cells["yetkiliUnvan"].Value;
+
+        //                ytk.CommandTimeout = 3000;
+        //                ytk.ExecuteNonQuery();
+        //            }
+        //        }
+
+
+        //        if (ytkSil.Count > 0)
+        //        {
+        //            var sil = new SqlCommand("Delete dbo.musteriYetkili where yetkiliID=@id", _baglanti.cnn);
+        //            sil.Parameters.Add("@id", SqlDbType.Int);
+        //            sil.CommandType = CommandType.Text;
+
+        //            foreach (int i in ytkSil)
+        //            {
+        //                sil.Parameters["@id"].Value = i.ToString();
+        //                sil.CommandTimeout = 3000;
+        //                sil.ExecuteNonQuery();
+        //            }
+        //        }
+
+
+        //        var dt = new DataTable();
+        //        new SqlDataAdapter(string.Format(("Select * from dbo.musteriYetkili Where mstYetkiliID = {0}"), labelID.Text), _baglanti.cnn).Fill(dt);
+        //        dgwYetkili.Rows.Clear();
+        //        dgwYetkili.DataSource = null;
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            dgwYetkili.Rows.Add(dt.Rows.Count);
+        //            int i = new int();
+        //            foreach (DataRow dr in dt.Rows)
+        //            {
+        //                dgwYetkili.Rows[i].Cells["yetkiliAdi"].Value = dr["yetkiliAd"].ToString();
+        //                dgwYetkili.Rows[i].Cells["yetkiliGSM"].Value = dr["yetkiliGsm"].ToString();
+        //                dgwYetkili.Rows[i].Cells["yetkiliTel"].Value = dr["yetkiliTel"].ToString();
+        //                dgwYetkili.Rows[i].Cells["yetkiliDahili"].Value = dr["yetkiliDahili"].ToString();
+        //                dgwYetkili.Rows[i].Cells["yetkiliUnvan"].Value = dr["yetkiliUnvan"].ToString();
+        //                dgwYetkili.Rows[i].Cells["yetkiliEposta"].Value = dr["yetkiliEposta"].ToString();
+        //                dgwYetkili.Rows[i].Cells["yetkiliId"].Value = dr["yetkiliID"].ToString();
+        //                i++;
+        //            }
+        //        }
+
+        //        MessageBox.Show("Kaydedildi !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+
+        //    ytkSil.Clear();
+        //    _baglanti.kapat();
+        //}
 
         private bool KaydetKontroller()
         {
@@ -481,7 +570,7 @@ namespace dernek
 
         private void dgwYetkili_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            ytkSil.Add(Convert.ToInt32(e.Row.Cells["yetkiliID"].Value));
+            ytkSil.Add((int)(e.Row.Cells["yetkiliID"].Value));
         }
 
         private void textBoxEPosta_Leave(object sender, EventArgs e)
@@ -553,9 +642,10 @@ namespace dernek
                 try
                 {
                     _baglanti.ac();
-                    var sil = new SqlCommand("dbo.musteri_sil", _baglanti.cnn);
-                    sil.CommandType = CommandType.StoredProcedure;
-                    sil.Parameters.AddWithValue("@musteriID", labelID.Text);
+                    var sil = new OleDbCommand("DELETE * FROM musteri WHERE mstID= " + labelID.Text, _baglanti.oleConn);
+                    //var sil = new SqlCommand("dbo.musteri_sil", _baglanti.cnn);
+                    //sil.CommandType = CommandType.StoredProcedure;
+                    //sil.Parameters.AddWithValue("@musteriID", labelID.Text);
                     sil.CommandTimeout = 3000;
                     sil.ExecuteNonQuery();
                     Temizle();

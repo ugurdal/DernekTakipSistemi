@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -36,6 +38,7 @@ namespace dernek
             _baglanti.user = Properties.Settings.Default.user;
             _baglanti.password = Properties.Settings.Default.password;
             _baglanti.datasource = Properties.Settings.Default.dataSource;
+            _baglanti.oleDbConnection = Properties.Settings.Default.oleDbConn;
 
             if (!_baglanti.basla())
                 Environment.Exit(1);
@@ -61,11 +64,13 @@ namespace dernek
 
             if (tum)
             {
-                new SqlDataAdapter(string.Format(("Select * from dbo.musteri Order By mstAd ")), _baglanti.cnn).Fill(dtMst);
+                //new SqlDataAdapter(string.Format(("Select * from dbo.musteri Order By mstAd ")), _baglanti.cnn).Fill(dtMst);
+                new OleDbDataAdapter(string.Format(("Select * from musteri Order By mstAd ")), _baglanti.oleConn).Fill(dtMst);
             }
             else
             {
-                new SqlDataAdapter(string.Format(("Select * from dbo.musteri Where {0} like '" + tsCariAra.Text + "%' Order By mstAd "), ad == true ? "mstAd" : "mstVN"), _baglanti.cnn).Fill(dtMst);
+                //new SqlDataAdapter(string.Format(("Select * from dbo.musteri Where {0} like '" + tsCariAra.Text + "%' Order By mstAd "), ad == true ? "mstAd" : "mstVN"), _baglanti.cnn).Fill(dtMst);
+                new OleDbDataAdapter(string.Format(("Select * from musteri Where {0} like '" + tsCariAra.Text + "%' Order By mstAd "), ad == true ? "mstAd" : "mstVN"), _baglanti.oleConn).Fill(dtMst);
             }
 
             dgwMusteriCari.DataSource = null;
@@ -155,15 +160,28 @@ namespace dernek
 
             _baglanti.ac();
             DataTable dtCari = new DataTable();
-            new SqlDataAdapter(string.Format(("Select * from dbo.cariIslemler_vw Where [MüşteriID]={0}"), mstID), _baglanti.cnn).Fill(dtCari);
+            //new SqlDataAdapter(string.Format(("Select * from dbo.cariIslemler_vw Where [MüşteriID]={0}"), mstID), _baglanti.cnn).Fill(dtCari);
+            new OleDbDataAdapter(string.Format(("SELECT cariID as [İşlem ID],cariEvrakNo as [Evrak No], cariTarih as [İşlem Tarihi],islemAd as [İşlem Tipi] " +
+                                                ",IIF(cariBA=0, 'Borç', 'Alacak') AS [Borç / Alacak], cariTutar as [İşlem Tutarı] " +
+                                                ",DSum(\"cariTutar\",\"cariIslemler\",\"cariID <= \" & cariID ) AS Bakiye, cariNot as Notlar " +
+                                                ",cariMusteri as [MüşteriID],  cariTip as [TipId],cariBA " +
+                                                " FROM cariIslemler INNER JOIN cariIslemTip ON cariIslemTip.islemID = cariIslemler.cariTip " +
+                                                " WHERE cariMusteri={0} ORDER BY cariTarih,cariID"),mstID), _baglanti.oleConn).Fill(dtCari);
+
+            double sum = 0;
+            foreach (DataRow dr in dtCari.Rows)
+            {
+                sum += double.Parse(dr["İşlem Tutarı"].ToString());
+                dr["Bakiye"] = sum;
+            }
 
             if (dtCari.Rows.Count == 0)
                 return;
 
             dgwCari.DataSource = dtCari;
             DataGridFormatla(dgwCari);
-            dgwCari.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            dgwCari.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgwCari.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+            //dgwCari.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             _baglanti.kapat();
             BakiyeOku(mstID);
         }
@@ -174,7 +192,7 @@ namespace dernek
             {
                 if (dr.Cells["cariBA"].Value.ToString() == "0")
                 {
-                    dr.DefaultCellStyle.BackColor = Color.LightGray;
+                    dr.DefaultCellStyle.BackColor = Color.LightBlue;
                 }
             }
             foreach (DataGridViewColumn cl in dgw.Columns)
@@ -195,7 +213,9 @@ namespace dernek
         {
             _baglanti.ac();
             DataTable dtCari = new DataTable();
-            new SqlDataAdapter(string.Format(("Select * from dbo.cariBakiye_vw Where cariMusteri={0}"), mstID), _baglanti.cnn).Fill(dtCari);
+            //new SqlDataAdapter(string.Format(("Select * from dbo.cariBakiye_vw Where cariMusteri={0}"), mstID), _baglanti.cnn).Fill(dtCari);
+            new OleDbDataAdapter(string.Format(("SELECT SUM(IIf(cariBA=0, cariTutar, 0 )) as borc,SUM(IIf(cariBA=1, cariTutar, 0 )) as alacak, " +
+                                                "SUM(cariTutar) as bakiye FROM cariIslemler WHERE cariMusteri={0}"), mstID), _baglanti.oleConn).Fill(dtCari);
 
             if (dtCari.Rows.Count == 0)
                 return;
@@ -210,7 +230,8 @@ namespace dernek
         {
             _baglanti.ac();
             DataTable dtIslemTip = new DataTable();
-            new SqlDataAdapter(("Select * from dbo.cariIslemTip Order By islemSira"), _baglanti.cnn).Fill(dtIslemTip);
+            //new SqlDataAdapter(("Select * from dbo.cariIslemTip Order By islemSira"), _baglanti.cnn).Fill(dtIslemTip);
+            new OleDbDataAdapter(("Select * from cariIslemTip "), _baglanti.oleConn).Fill(dtIslemTip);
             comboBoxIslemTip.DisplayMember = "islemAd";
             comboBoxIslemTip.ValueMember = "islemId";
             comboBoxIslemTip.DataSource = dtIslemTip;
@@ -239,40 +260,100 @@ namespace dernek
 
         private void Kaydet()
         {
-            _baglanti.ac();
-
             try
             {
-                var kaydet = new SqlCommand("dbo.cari_ekle", _baglanti.cnn);
-                kaydet.CommandType = CommandType.StoredProcedure;
-                SqlParameter id = kaydet.Parameters.Add("@cID", SqlDbType.Int);
-                id.Direction = ParameterDirection.ReturnValue;
-                kaydet.Parameters.AddWithValue("@cID", labelID.Text);
-                kaydet.Parameters.AddWithValue("@no", textBoxEvrakNo.Text);
-                kaydet.Parameters.AddWithValue("@tip", comboBoxIslemTip.SelectedValue);
-                kaydet.Parameters.AddWithValue("@musteri", labelKod.Text);
-                kaydet.Parameters.AddWithValue("@cba", comboboxBA.SelectedIndex);
-                double tutar = double.Parse(textBoxTutar.Text.Replace("-", ""));
-                kaydet.Parameters.AddWithValue("@tutar", comboboxBA.SelectedIndex == 0 ? tutar : -1 * tutar);
-                kaydet.Parameters.AddWithValue("@tarih", islemTarihi.SelectionStart.ToShortDateString());
-                kaydet.Parameters.AddWithValue("@not", textBoxNot.Text);
-                kaydet.Parameters.AddWithValue("@kisi", 1);
+                _baglanti.ac();
+                var tutar = comboboxBA.SelectedIndex == 0 ? double.Parse(textBoxTutar.Text.Replace("-", "")) : -1 * double.Parse(textBoxTutar.Text.Replace("-", ""));
+                
+                if (labelID.Text != "0")
+                {
+                    var car = new OleDbCommand();
+                    car.Connection = _baglanti.oleConn;
+                    car.CommandType = CommandType.Text;
+                    car.CommandText = " UPDATE cariIslemler " +
+                                            " SET cariEvrakNo='" + textBoxEvrakNo.Text + "'" +
+                                                ", cariTip='" + comboBoxIslemTip.SelectedValue + "'" +
+                                                ", cariBA='" + comboboxBA.SelectedIndex + "'" +
+                                                ", cariTutar='" + tutar + "'" +
+                                                ", cariTarih='" + islemTarihi.SelectionStart.ToShortDateString() + "'" +
+                                                ", cariTarihVade='" + islemTarihi.SelectionStart.ToShortDateString() + "'" +
+                                                ", cariNot='" + textBoxNot.Text + "'" +
+                                            " WHERE cariID=" + labelID.Text;
+                    car.ExecuteNonQuery();
+                    MessageBox.Show("Güncellendi !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    var IDBul = new OleDbCommand("Select @@Identity", _baglanti.oleConn);
+                    IDBul.CommandType = CommandType.Text;
+                    IDBul.CommandTimeout = 3000;
 
-                kaydet.CommandTimeout = 3000;
-                kaydet.ExecuteNonQuery();
-                labelID.Text = id.Value.ToString();
-                MessageBox.Show("Kaydedildi !", "Cari", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var car = new OleDbCommand();
+                    car.Connection = _baglanti.oleConn;
+                    car.CommandType = CommandType.Text;
+                    car.CommandTimeout = 3000;
+                    car.CommandText = " INSERT INTO cariIslemler (cariEvrakNo, cariTip ,cariMusteri ,cariBA ,cariTutar ,cariTarih ,cariTarihVade ,cariNot ,cariKisi )" +
+                                            " SELECT '" + textBoxEvrakNo.Text + "'" +
+                                                ", '" + comboBoxIslemTip.SelectedValue + "'" +
+                                                ", '" + labelKod.Text + "'" +
+                                                ", '" + comboboxBA.SelectedIndex + "'" +
+                                                ", '" + tutar + "'" +
+                                                ", '" + islemTarihi.SelectionStart.ToShortDateString() + "'" +
+                                                ", '" + islemTarihi.SelectionStart.ToShortDateString() + "'" +
+                                                ", '" + textBoxNot.Text + "',1";
+                    car.ExecuteNonQuery();
+                    labelID.Text = IDBul.ExecuteScalar().ToString();
+                    MessageBox.Show("Kaydedildi !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
 
                 BakiyeOku(int.Parse(labelKod.Text));
                 CariHareketDoldur(int.Parse(labelKod.Text));
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata : " + ex.Message);
+                MessageBox.Show(ex.Message);
             }
-
             _baglanti.kapat();
         }
+
+
+        //private void Kaydet()
+        //{
+        //    _baglanti.ac();
+
+        //    try
+        //    {
+        //        var kaydet = new SqlCommand("dbo.cari_ekle", _baglanti.cnn);
+        //        kaydet.CommandType = CommandType.StoredProcedure;
+        //        SqlParameter id = kaydet.Parameters.Add("@cID", SqlDbType.Int);
+        //        id.Direction = ParameterDirection.ReturnValue;
+        //        kaydet.Parameters.AddWithValue("@cID", labelID.Text);
+        //        kaydet.Parameters.AddWithValue("@no", textBoxEvrakNo.Text);
+        //        kaydet.Parameters.AddWithValue("@tip", comboBoxIslemTip.SelectedValue);
+        //        kaydet.Parameters.AddWithValue("@musteri", labelKod.Text);
+        //        kaydet.Parameters.AddWithValue("@cba", comboboxBA.SelectedIndex);
+        //        double tutar = double.Parse(textBoxTutar.Text.Replace("-", ""));
+        //        kaydet.Parameters.AddWithValue("@tutar", comboboxBA.SelectedIndex == 0 ? tutar : -1 * tutar);
+        //        kaydet.Parameters.AddWithValue("@tarih", islemTarihi.SelectionStart.ToShortDateString());
+        //        kaydet.Parameters.AddWithValue("@not", textBoxNot.Text);
+        //        kaydet.Parameters.AddWithValue("@kisi", 1);
+
+        //        kaydet.CommandTimeout = 3000;
+        //        kaydet.ExecuteNonQuery();
+        //        labelID.Text = id.Value.ToString();
+        //        MessageBox.Show("Kaydedildi !", "Cari", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        //        BakiyeOku(int.Parse(labelKod.Text));
+        //        CariHareketDoldur(int.Parse(labelKod.Text));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Hata : " + ex.Message);
+        //    }
+
+        //    _baglanti.kapat();
+        //}
 
         private void dgwCari_Sorted(object sender, EventArgs e)
         {
@@ -330,6 +411,7 @@ namespace dernek
             CariSil(labelID.Text);
             BakiyeOku(int.Parse(labelKod.Text));
             CariHareketDoldur(int.Parse(labelKod.Text));
+            Temizle();
         }
 
         private void CariSil(string cariID)
@@ -337,9 +419,10 @@ namespace dernek
             _baglanti.ac();
             try
             {
-                var sil = new SqlCommand("dbo.cari_sil", _baglanti.cnn);
-                sil.CommandType = CommandType.StoredProcedure;
-                sil.Parameters.AddWithValue("@cID", cariID);
+                //var sil = new SqlCommand("dbo.cari_sil", _baglanti.cnn);
+                //sil.CommandType = CommandType.StoredProcedure;
+                var sil = new OleDbCommand(string.Format("DELETE * FROM cariIslemler WHERE cariID={0} ",cariID), _baglanti.oleConn);
+                //sil.Parameters.AddWithValue("@cID", cariID);
                 sil.CommandTimeout = 3000;
                 sil.ExecuteNonQuery();
             }

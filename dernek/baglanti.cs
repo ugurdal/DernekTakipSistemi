@@ -21,7 +21,6 @@ public class baglanti
     SqlDataAdapter adpTemp = new System.Data.SqlClient.SqlDataAdapter();
     SqlCommand cmdTemp = new System.Data.SqlClient.SqlCommand();
 
-
     public string oleDbConnection
     {
         get { return oledb; }

@@ -30,7 +30,7 @@ namespace dernek
             _baglanti.user = Properties.Settings.Default.user;
             _baglanti.password = Properties.Settings.Default.password;
             _baglanti.datasource = Properties.Settings.Default.dataSource;
-            _baglanti.oleDbConnection = Properties.Settings.Default.oleDbConn;
+            _baglanti.oleDbConnection = conn.bag;
 
             if (!_baglanti.basla())
                 Environment.Exit(1);

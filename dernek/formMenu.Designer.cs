@@ -154,7 +154,7 @@
             this.gbKullanici.Size = new System.Drawing.Size(154, 111);
             this.gbKullanici.TabIndex = 10;
             this.gbKullanici.TabStop = false;
-            this.gbKullanici.Text = "Kullanici Tanimlari";
+            this.gbKullanici.Text = "Kullanıcı Tanımları";
             // 
             // groupBox3
             // 
@@ -324,6 +324,9 @@
             this.pbKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbKullanici.TabIndex = 8;
             this.pbKullanici.TabStop = false;
+            this.pbKullanici.Click += new System.EventHandler(this.pbKullanici_Click);
+            this.pbKullanici.MouseEnter += new System.EventHandler(this.pbKullanici_MouseEnter);
+            this.pbKullanici.MouseLeave += new System.EventHandler(this.pbKullanici_MouseLeave);
             // 
             // pictureBox2
             // 

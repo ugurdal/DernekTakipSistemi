@@ -99,6 +99,24 @@ namespace dernek
             System.Diagnostics.Process.Start("https://twitter.com/ugurdal");
         }
 
+        private void pbKullanici_Click(object sender, EventArgs e)
+        {
+            var frm = new formKullanici();
+            frm.ShowDialog();
+        }
+
+        private void pbKullanici_MouseEnter(object sender, EventArgs e)
+        {
+            gbKullanici.Cursor = Cursors.Hand;
+            gbKullanici.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+        }
+
+        private void pbKullanici_MouseLeave(object sender, EventArgs e)
+        {
+            gbKullanici.Cursor = Cursors.Default;
+            gbKullanici.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+        }
+
 
     }
 }

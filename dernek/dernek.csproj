@@ -62,6 +62,12 @@
     <Compile Include="formCari.Designer.cs">
       <DependentUpon>formCari.cs</DependentUpon>
     </Compile>
+    <Compile Include="formKullanici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formKullanici.Designer.cs">
+      <DependentUpon>formKullanici.cs</DependentUpon>
+    </Compile>
     <Compile Include="formMusteri.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="formCari.resx">
       <DependentUpon>formCari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formKullanici.resx">
+      <DependentUpon>formKullanici.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formMenu.resx">
       <DependentUpon>formMenu.cs</DependentUpon>
@@ -126,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="file.ico" />
+    <None Include="Resources\key.png" />
     <None Include="Resources\twitter.png" />
     <None Include="Resources\ins.png" />
     <None Include="Resources\face1.png" />

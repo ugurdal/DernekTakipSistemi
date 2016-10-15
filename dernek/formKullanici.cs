@@ -213,7 +213,7 @@ namespace dernek
                                             ", '" + tbYeniParola.Text + "'" ;
                 cmd.ExecuteNonQuery();
                 labelID.Text = IDBul.ExecuteScalar().ToString();
-                MessageBox.Show("Kullanıcı eklendi !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Kullanıcı eklendi !", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             Kullanıcılar();

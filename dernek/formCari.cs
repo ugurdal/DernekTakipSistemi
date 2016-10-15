@@ -177,7 +177,7 @@ namespace dernek
             DataTable dtCari = new DataTable();
             //new SqlDataAdapter(string.Format(("Select * from dbo.cariIslemler_vw Where [MüşteriID]={0}"), mstID), _baglanti.cnn).Fill(dtCari);
             new OleDbDataAdapter(string.Format(("SELECT cariID as [İşlem ID],cariEvrakNo as [Evrak No], cariTarih as [İşlem Tarihi],islemAd as [İşlem Tipi] " +
-                                                ",IIF(cariBA=0, 'Borç', 'Alacak') AS [Borç / Alacak], cariTutar as [İşlem Tutarı] " +
+                                                ",IIF(cariBA=1, 'Borç', 'Alacak') AS [Borç / Alacak], cariTutar as [İşlem Tutarı] " +
                                                 ",DSum(\"cariTutar\",\"cariIslemler\",\"cariID <= \" & cariID ) AS Bakiye, cariNot as Notlar " +
                                                 ",cariMusteri as [MüşteriID],  cariTip as [TipId],cariBA " +
                                                 " FROM cariIslemler INNER JOIN cariIslemTip ON cariIslemTip.islemID = cariIslemler.cariTip " +
@@ -230,7 +230,7 @@ namespace dernek
             _baglanti.ac();
             DataTable dtCari = new DataTable();
             //new SqlDataAdapter(string.Format(("Select * from dbo.cariBakiye_vw Where cariMusteri={0}"), mstID), _baglanti.cnn).Fill(dtCari);
-            new OleDbDataAdapter(string.Format(("SELECT SUM(IIf(cariBA=0, cariTutar, 0 )) as borc,SUM(IIf(cariBA=1, cariTutar, 0 )) as alacak, " +
+            new OleDbDataAdapter(string.Format(("SELECT SUM(IIf(cariBA=1, cariTutar, 0 )) as borc,SUM(IIf(cariBA=0, cariTutar, 0 )) as alacak, " +
                                                 "SUM(cariTutar) as bakiye FROM cariIslemler WHERE cariMusteri={0}"), mstID), _baglanti.oleConn).Fill(dtCari);
 
             if (dtCari.Rows.Count == 0)
@@ -284,7 +284,7 @@ namespace dernek
             try
             {
                 _baglanti.ac();
-                var tutar = comboboxBA.SelectedIndex == 0 ? double.Parse(textBoxTutar.Text.Replace("-", "")) : -1 * double.Parse(textBoxTutar.Text.Replace("-", ""));
+                var tutar = comboboxBA.SelectedIndex == 1 ? double.Parse(textBoxTutar.Text.Replace("-", "")) : -1 * double.Parse(textBoxTutar.Text.Replace("-", ""));
 
                 if (labelID.Text != "0")
                 {
